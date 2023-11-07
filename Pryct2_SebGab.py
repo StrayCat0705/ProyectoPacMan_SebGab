@@ -158,7 +158,7 @@ def ven0():
         fantasma_rojo = Fantasma(estado=True, posicion_x=20, posicion_y=20, color='rojo')  
     
     def high_scores():
-        print(2)
+        print('Nueva prueba')
     
     def settings():
         print(3)
