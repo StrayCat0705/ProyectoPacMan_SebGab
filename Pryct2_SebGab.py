@@ -128,6 +128,10 @@ def ven0():
             name_pantalla_TP.config(bg='#242424')
             name_pantalla_TP.title('PACKUMAN-lvl1')
 
+            get_name = StringVar()
+            entry_name = tk.Entry(pantalla_name, width= 50, borderwidth=10,  textvariable = get_name).place(x=450, y=400)
+
+
             def introducir_name():
                 global Name
                 Name = get_name.get()
