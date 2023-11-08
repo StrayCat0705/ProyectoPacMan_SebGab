@@ -57,55 +57,10 @@ def ven0():
     # Imprimir el tablero inicial
     for fila in tablero:
         print(' '.join(map(str, fila)))
-        
-    
 
     # Crear instancias de PacMan y Fantasma
     pacman = PacMan(estado=True, posicion_x=2, posicion_y=2, velocidad=1)
     fantasma_rojo = Fantasma(estado=True, posicion_x=20, posicion_y=20, color='rojo')    
-
-    #Funciones 
-    def name_pantalla():
-        #Colores 
-        n_grey = '#242424'
-        # Top level
-        name_pantalla_TP = tk.Toplevel()
-        name_pantalla_TP.geometry('600x650')
-        name_pantalla_TP.config(bg='#242424')
-        name_pantalla_TP.title('ROBOTS-lvl1')
-
-        # Recuperar nombre
-        get_name = tk.StringVar()
-        entry_name = tk.Entry(name_pantalla_TP, width=50, borderwidth=10, textvariable=get_name)
-        entry_name.place(x=150, y=275)
-
-        def introducir_name():
-            global Name
-            Name = get_name.get()
-            if isinstance(Name, str):
-                level_1()
-                print(Name)
-            else:
-                print('Nombre no valido')
-
-        intro_num = tk.Button(name_pantalla_TP, text='Introduzca el nombre', font='Courier', command=introducir_name, height=3, width=20)
-        intro_num.place(x=200, y=325)
-
-        # Cerrar la pantalla
-        close_ventana_name = tk.Button(name_pantalla_TP, text='X', fg='red', command=name_pantalla_TP.destroy)
-        close_ventana_name.place(x=1180, y=0)
-
-    #Definir clases de enemigos
-    class Fantasma(Personaje):
-        def __init__(self, estado, posicion_x, posicion_y, color):
-            # Velocidad dependiendo del color
-            if color == 'rojo':
-                    velocidad = 'rápido'
-            else:
-                velocidad = 'normal'
-                
-            super().__init__(estado, posicion_x, posicion_y, velocidad)
-
 
     class Personaje:
             def __init__(self, estado, posicion_x, posicion_y, velocidad):
@@ -138,6 +93,17 @@ def ven0():
                 # Lógica para comer cápsula
                 pass
 
+    #Definir clases de enemigos
+    class Fantasma(Personaje):
+        def __init__(self, estado, posicion_x, posicion_y, color):
+            # Velocidad dependiendo del color
+            if color == 'rojo':
+                    velocidad = 'rápido'
+            else:
+                velocidad = 'normal'
+                
+            super().__init__(estado, posicion_x, posicion_y, velocidad)
+
     class PacMan(Personaje):
             def __init__(self, estado, posicion_x, posicion_y, velocidad):
                 super().__init__(estado, posicion_x, posicion_y, velocidad)
@@ -149,33 +115,58 @@ def ven0():
             def comer_capsula(self):
                 # Lógica específica para PacMan al comer cápsula
                 pass
+    class ventanas:
+        def __innit__(self, score, name):
+            self.name = name
+            self.score = score
+        def namePantalla(self):
+            #Colores 
+            n_grey = '#242424'
+            # Top level
+            name_pantalla_TP = tk.Toplevel()
+            name_pantalla_TP.geometry('600x650')
+            name_pantalla_TP.config(bg='#242424')
+            name_pantalla_TP.title('ROBOTS-lvl1')
 
-    def level_1():
-        print('abriendo level 1')
-        
-        # Crear instancias de PacMan y Fantasma
-        pacman = PacMan(estado=True, posicion_x=2, posicion_y=2, velocidad=1)
-        fantasma_rojo = Fantasma(estado=True, posicion_x=20, posicion_y=20, color='rojo')  
-    
-    def high_scores():
-        print('Nueva')
-    
-    def settings():
-        print(3)
+            # Recuperar nombre
+            get_name = tk.StringVar()
+            entry_name = tk.Entry(name_pantalla_TP, width=50, borderwidth=10, textvariable=get_name)
+            entry_name.place(x=150, y=275)
 
-    def help_center():
-        print(4)
-    
-    def about_us():
-        print(5)
+            def introducir_name():
+                global Name
+                Name = get_name.get()
+                if isinstance(Name, str):
+                    level_1
+                    self.name = Name
+                    print(Name)
+                else:
+                    print('Nombre no valido')
+
+            intro_num = tk.Button(name_pantalla_TP, text='Introduzca el nombre', font='Courier', command=introducir_name, height=3, width=20)
+            intro_num.place(x=200, y=325)
+
+            # Cerrar la pantalla
+            close_ventana_name = tk.Button(name_pantalla_TP, text='X', fg='red', command=name_pantalla_TP.destroy)
+            close_ventana_name.place(x=1180, y=0)
+        def highScores(self):
+            print(1)
+        def settings(self):
+            print(2)
+        def aboutUs(self):
+            print(3)
+        def helpCenter(self):
+            print(4)
+        def level_1(self, name, score):
+            print(5, str(name), score)
 
     #Botones
-    play_button = Button(r, text='PLAY', font='Courier 14', command=name_pantalla)
+    play_button = Button(r, text='PLAY', font='Courier 14', command=namePantalla)
     play_button.config(width=14, height=3)
-    score_button = Button(r, text='High scores', font='Courier', command=high_scores)
+    score_button = Button(r, text='High scores', font='Courier', command=highScores)
     config_button = Button(r, text='Settings', font='Courier', command=settings)
-    info_button = Button(r, text='About us', font='Courier', command=about_us)
-    help_button = Button(r, text='Help', command=help_center)
+    info_button = Button(r, text='About us', font='Courier', command=aboutUs)
+    help_button = Button(r, text='Help', command=helpCenter)
     play_window = mainmenu_canvas.create_window(600, 460, anchor="center", window=play_button)
     score_window = mainmenu_canvas.create_window(600, 510, anchor="n", window=score_button)
     config_window = mainmenu_canvas.create_window(600, 550, anchor="n", window=config_button)
