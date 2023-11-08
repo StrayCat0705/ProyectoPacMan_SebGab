@@ -128,10 +128,25 @@ def ven0():
             name_pantalla_TP.config(bg='#242424')
             name_pantalla_TP.title('ROBOTS-lvl1')
 
+<<<<<<< HEAD
             # Recuperar nombre
             get_name = tk.StringVar()
             entry_name = tk.Entry(name_pantalla_TP, width=50, borderwidth=10, textvariable=get_name)
             entry_name.place(x=150, y=275)
+=======
+    def level_1():
+        print('abriendo level 1')
+        
+        # Crear instancias de PacMan y Fantasma
+        pacman = PacMan(estado=True, posicion_x=2, posicion_y=2, velocidad=1)
+        fantasma_rojo = Fantasma(estado=True, posicion_x=20, posicion_y=20, color='rojo')  
+    
+    def high_scores():
+        print(2)
+    
+    def settings():
+        print(3)
+>>>>>>> 6d0db86c310ae12f6162be03ac326c8bcb271d2f
 
             def introducir_name():
                 global Name
