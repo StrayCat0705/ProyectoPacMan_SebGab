@@ -8,66 +8,103 @@ columnas = 36
 # Crear el tablero inicial
 tablero = [[4 for _ in range(columnas)] for n in range(filas)]
 
-# Lista de enemigos (cada enemigo es una tupla de coordenadas)
-enemigos = [(10, 15), (20, 25), (30, 5)]
 
-# Posición inicial del jugador en la matriz
-posx = 5
-posy = 5
 
+# Clase base para los personajes
+class Personaje:
+    def __init__(self, estado, posicion_x, posicion_y, velocidad):
+        self.estado = estado
+        self.posicion_x = posicion_x
+        self.posicion_y = posicion_y
+        self.velocidad = velocidad
+
+    def mover_izquierda(self):
+        if self.posicion_y > 0:
+            self.posicion_y -= 1
+
+    def mover_derecha(self):
+        if self.posicion_y < columnas - 1:
+            self.posicion_y += 1
+
+    def mover_arriba(self):
+        if self.posicion_x > 0:
+            self.posicion_x -= 1
+
+    def mover_abajo(self):
+        if self.posicion_x < filas - 1:
+            self.posicion_x += 1
+
+    def comer_alimento(self):
+        # Lógica para comer alimento
+        pass
+
+    def comer_capsula(self):
+        # Lógica para comer cápsula
+        pass
+
+# Clase para PacMan
+class PacMan(Personaje):
+    def __init__(self, estado, posicion_x, posicion_y, velocidad):
+        super().__init__(estado, posicion_x, posicion_y, velocidad)
+
+    def comer_alimento(self):
+        # Lógica específica para PacMan al comer alimento
+        pass
+
+    def comer_capsula(self):
+        # Lógica específica para PacMan al comer cápsula
+        pass
+
+# Clase para Fantasma
+class Fantasma(Personaje):
+    def __init__(self, estado, posicion_x, posicion_y, color):
+        # Velocidad dependiendo del color
+        if color == 'rojo':
+            velocidad = 'rápido'
+        else:
+            velocidad = 'normal'
+        
+        super().__init__(estado, posicion_x, posicion_y, velocidad)
+        self.color = color
+
+# Crear una instancia de PacMan y configurar su posición inicial
+pacman = PacMan(estado=True, posicion_x=5, posicion_y=5, velocidad=1)
+# Lista de enemigos (cada enemigo es una instancia de Fantasma)
+enemigos = [Fantasma(estado=True, posicion_x=10, posicion_y=15, color='rojo'),
+            Fantasma(estado=True, posicion_x=20, posicion_y=25, color='celeste'),
+            Fantasma(estado=True, posicion_x=30, posicion_y=5, color='rosado'),
+            Fantasma(estado=True, posicion_x=30, posicion_y=10, color='naranja'),]
 # Función para imprimir el tablero con separación horizontal
 def imprimir_matriz():
     for n in range(len(tablero)):
         row = ""
         for x in range(len(tablero[0])):
-            if n == posy and x == posx:
+            if n == pacman.posicion_y and x == pacman.posicion_x:
                 row += "⍩⃝ "
-            elif (n, x) in enemigos:
-                row += "👻 "
             else:
-                if tablero[n][x] == 0:
-                    row += "0 "
+                for enemigo in enemigos:
+                    if n == enemigo.posicion_y and x == enemigo.posicion_x:
+                        row += "👻 "
+                        break
                 else:
-                    row += "4 "
+                    if tablero[n][x] == 0:
+                        row += "0 "
+                    else:
+                        row += "4 "
         print(row)
-    print(f"posx:{posx}, posy: {posy}\n")
-
-# Función para actualizar la matriz con el movimiento de los enemigos
-# Función para actualizar la matriz con el movimiento de los enemigos
-def mover_enemigos():
-    global posx, posy
-
-    for i, (enemigo_x, enemigo_y) in enumerate(enemigos):
-        # Generar un movimiento aleatorio para cada enemigo
-        movimiento_x = random.choice([-1, 0, 1])
-        movimiento_y = random.choice([-1, 0, 1])
-
-        # Actualizar la posición del enemigo
-        nuevo_x = enemigo_x + movimiento_x
-        nuevo_y = enemigo_y + movimiento_y
-
-        # Verificar que el enemigo no choque con una pared o salga del tablero
-        if (0 <= nuevo_x < columnas and 0 <= nuevo_y < filas and tablero[nuevo_y][nuevo_x] != 0):
-            enemigos[i] = (nuevo_x, nuevo_y)
-
-    # Verificar si el jugador choca con un enemigo
-    if (posx, posy) in enemigos:
-        print("¡Has sido atrapado por un fantasma! Fin del juego.")
-        exit()  # Puedes ajustar esto según tus necesidades
-
+    print(f"posx:{pacman.posicion_x}, posy: {pacman.posicion_y}\n")
 
 # Restringir el movimiento del jugador solo cuando no hay enemigos en la casilla
 def puede_mover(x, y):
-    return (0 <= x < columnas and 0 <= y < filas and tablero[y][x] != 0 and (x, y) not in enemigos)
+    return (0 <= x < columnas and 0 <= y < filas and tablero[y][x] != 0 and not any(enemigo.posicion_x == x and enemigo.posicion_y == y for enemigo in enemigos))
 
 # Función para mover al jugador
 def mover_jugador(dx, dy):
-    global posx, posy
-    nuevo_x = posx + dx
-    nuevo_y = posy + dy
+    nuevo_x = pacman.posicion_x + dx
+    nuevo_y = pacman.posicion_y + dy
     if puede_mover(nuevo_x, nuevo_y):
-        posx = nuevo_x
-        posy = nuevo_y
+        pacman.posicion_x = nuevo_x
+        pacman.posicion_y = nuevo_y
         imprimir_matriz()
 
 # Asignar las funciones de movimiento a las teclas
@@ -95,8 +132,22 @@ for tecla in teclas:
     elif tecla == 'a':
         keyboard.add_hotkey(tecla, mover_izquierda)
 
+# Función para mover a los enemigos
+def mover_enemigos():
+    for enemigo in enemigos:
+        movimiento_x = random.choice([-1, 0, 1])
+        movimiento_y = random.choice([-1, 0, 1])
+
+        nuevo_x = enemigo.posicion_x + movimiento_x
+        nuevo_y = enemigo.posicion_y + movimiento_y
+
+        if (0 <= nuevo_x < columnas and 0 <= nuevo_y < filas and tablero[nuevo_y][nuevo_x] != 0):
+            enemigo.posicion_x = nuevo_x
+            enemigo.posicion_y = nuevo_y
+
 # Bucle principal
 while True:
-    mover_enemigos()  # Mover a los enemigos aleatoriamente
-    imprimir_matriz()  # Actualizar y mostrar la matriz con separación horizontal
-    keyboard.read_event()  # Leer eventos del teclado
+    mover_enemigos()
+    imprimir_matriz()
+    keyboard.read_event()
+
