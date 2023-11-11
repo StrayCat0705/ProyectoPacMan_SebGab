@@ -9,6 +9,7 @@ import time
 import random 
 import pygame 
 import time 
+import keyboard
 
 #Definir la pantalla del juego 
 def ven0():
@@ -34,13 +35,11 @@ def ven0():
             self.score = score
 
         def namePantalla(self):
-            # Colores
-            n_grey = '#242424'
             # Top level
             name_pantalla_TP = tk.Toplevel()
             name_pantalla_TP.geometry('600x650')
             name_pantalla_TP.config(bg='#242424')
-            name_pantalla_TP.title('PACKUMAN-lvl1')
+            name_pantalla_TP.title('PACKUMAN-NP')
 
             get_name = StringVar()
             entry_name = tk.Entry(name_pantalla_TP, width= 50, borderwidth=10,  textvariable = get_name).place(x=140, y=400)
@@ -73,31 +72,101 @@ def ven0():
 
         def helpCenter(self):
             print(4)
+        
+        def highScores(self):
+            print(7)
 
         def level_1(self):
-            print(5, str(self.name), self.score)
-            ventana_instance = Ventanas(self.score, self.name)
-            ventana_instance.level_2()
+            #Variables
+            lives = 3
+            enemies = 5
+            high_score = 999999999
+            comida = 10
+            #Top level
+            level1 = tk.Toplevel()
+            level1.geometry('400x400')
+            level1.config(bg=white)
+            level1.title('PUCKMAN-lvl1')
+            #Canvas de lvl1
+            level1_canvas = Canvas(level1, width=400, height=360, bg= 'black')
+            level1_canvas.pack()
+            #Condicion para que se abra el segundo nivel 
+            if comida == 0:
+                ventana_instance = Ventanas(self.score, self.name)
+                ventana_instance.level_2(enemies)
+            #Frame
+            info_frame = tk.Frame(level1, bg=white)
+            info_frame.pack() 
+            #Texto 
+            score_text = tk.Label(info_frame, text='Score: ' + str(self.score), bg=white)
+            score_text.grid(row=0, column=0, padx=10)
+            lives_text = tk.Label(info_frame, text='Lives: ' + str(lives), bg=white)
+            lives_text.grid(row=0, column=1, padx=10) 
+            enemies_text = tk.Label(info_frame, text='Enemies: ' + str(enemies), bg=white)
+            enemies_text.grid(row=0, column=2, padx=10)
+            scores_text = tk.Label(info_frame, text='High Score: ' + str(high_score), bg=white)
+            scores_text.grid(row=0, column=3, padx=10)
+            #Matriz 
+            matriz = '-'
+            #Mapa 
+            def dibujar_cuadros_desde_matriz(matriz):
+                for fila in range(len(matriz)):
+                    for columna in range(len(matriz[0])):
+                        if matriz[fila][columna] == 0:
+                            # Coordenadas del cuadro en el canvas
+                            x1 = columna * 10
+                            y1 = fila * 10
+                            x2 = x1 + 10
+                            y2 = y1 + 10
+                            level1_canvas.create_rectangle(x1, y1, x2, y2, fill="blue")
 
-        def level_2(self):
-            print(6, str(self.name), self.score)
+        def level_2(self, enemies):
+            #Variables
+            lives = 3
+            enemies = 5
+            high_score = 999999999
+            comida = 10
+            #Top level
+            level2 = tk.Toplevel()
+            level2.geometry('400x400')
+            level2.config(bg=white)
+            level2.title('PUCKMAN-lvl2')
+            #Canvas de lvl1
+            level2_canvas = Canvas(level2, width=400, height=360, bg= 'black')
+            level2_canvas.pack()
+            #Condicion para que se abra el segundo nivel 
+            if comida == 0:
+                ventana_instance = Ventanas(self.score, self.name)
+                ventana_instance.level_2(enemies)
+            #Frame
+            info_frame = tk.Frame(level2, bg=white)
+            info_frame.pack() 
+            #Texto 
+            score_text = tk.Label(info_frame, text='Score: ' + str(self.score), bg=white)
+            score_text.grid(row=0, column=0, padx=10)
+            lives_text = tk.Label(info_frame, text='Lives: ' + str(lives), bg=white)
+            lives_text.grid(row=0, column=1, padx=10) 
+            enemies_text = tk.Label(info_frame, text='Enemies: ' + str(enemies), bg=white)
+            enemies_text.grid(row=0, column=2, padx=10)
+            scores_text = tk.Label(info_frame, text='High Score: ' + str(high_score), bg=white)
+            scores_text.grid(row=0, column=3, padx=10)
 
-    # Create instances of the class
+    #Instancias de las clases 
     def namePantalla():
         ventana_instance = Ventanas(score=0, name="DefaultName")
         ventana_instance.namePantalla()
     def highScores():
         ventana_instance = Ventanas(score=0, name="DefaultName")
-        ventana_instance.namePantalla()
+        ventana_instance.highScores()
     def settings():
         ventana_instance = Ventanas(score=0, name="DefaultName")
-        ventana_instance.namePantalla()
+        ventana_instance.settings()
     def aboutUs():
         ventana_instance = Ventanas(score=0, name="DefaultName")
-        ventana_instance.namePantalla()
+        ventana_instance.aboutUs()
     def helpCenter():
         ventana_instance = Ventanas(score=0, name="DefaultName")
-        ventana_instance.namePantalla()
+        ventana_instance.helpCenter()
 
     #Botones
     play_button = Button(r, text='PLAY', font='Courier 14', command=namePantalla)
