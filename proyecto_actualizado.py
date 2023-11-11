@@ -6,9 +6,7 @@ filas = 7
 columnas = 7
 
 # Crear el tablero inicial
-tablero1 = [[4 for _ in range(columnas)] for n in range(filas)]
-tablero2 = [[4 for _ in range(columnas)] for n in range(filas)]
-
+tablero = [[4 for _ in range(columnas)] for n in range(filas)]
 
 # Clase base para los personajes
 class Personaje:
@@ -57,14 +55,20 @@ class PacMan(Personaje):
     #Conseguir las coordenadas de pacman 
     def get_posicionXY_pac(self):
         return self.posicion_x, self.posicion_y
+    def get_posicionX(self):
+        return self.posicion_x
+    def get_posicionY(self):
+        return self.posicion_y
     #Conseguir el estado de pacman
     def get_estadoPac(self):
         return self.estado
     #Cambiar de estado
     def cambio_de_estado(self):
         self.estado = 'comer'
+        print('cambio estado')
     def cambio_de_estado2(self):
         self.estado = 'comida'
+        print('cambio estado')
         
 # Clase para Fantasma
 class Fantasma(Personaje):
@@ -92,9 +96,9 @@ enemigos = [Fantasma(estado=True, posicion_x=6, posicion_y=5, color='rojo'),
 
 # Función para imprimir el tablero con separación horizontal
 def imprimir_matriz():
-    for n in range(len(tablero1)):
+    for n in range(len(tablero)):
         row = ""
-        for x in range(len(tablero1[0])):
+        for x in range(len(tablero[0])):
             if n == pacman.posicion_y and x == pacman.posicion_x:
                 row += "⍩⃝ "
             else:
@@ -103,7 +107,7 @@ def imprimir_matriz():
                         row += "👻 "
                         break
                 else:
-                    if tablero1[n][x] == 0:
+                    if tablero[n][x] == 0:
                         row += "0 "
                     else:
                         row += "4 "
@@ -111,15 +115,15 @@ def imprimir_matriz():
     print(f"posx:{pacman.posicion_x}, posy: {pacman.posicion_y}\n")
 
 def imprimir_matriz2():
-    for n in range(len(tablero1)):
+    for n in range(len(tablero)):
         row = ""
-        for x in range(len(tablero1[0])):
+        for x in range(len(tablero[0])):
             for enemigo in enemigos:
                 if n == enemigo.posicion_y and x == enemigo.posicion_x:
                     row += "👻 "
                     break
                 else:
-                    if tablero1[n][x] == 0:
+                    if tablero[n][x] == 0:
                         row += "0 "
                     else:
                         row += "4 "
@@ -149,17 +153,56 @@ def colisiones():
             i+=1
             print('No chocaron')
 
+#Comida 
+def comer_d():
+    coordPAC = pacman.get_posicionXY_pac()
+    if tablero[pacman.get_posicionX() + 1][pacman.get_posicionY()] == 3:
+        print('comida')
+    elif tablero[pacman.get_posicionX() + 1][pacman.get_posicionY()] == 2:
+        pacman.cambio_de_estado()
+    else:
+        print('no comida')
+def comer_i():
+    coordPAC = pacman.get_posicionXY_pac()
+    if tablero[pacman.get_posicionX() - 1][pacman.get_posicionY()] == 3:
+        print('comida')
+    elif tablero[pacman.get_posicionX() - 1][pacman.get_posicionY()] == 2:
+        pacman.cambio_de_estado()
+    else:
+        print('no comida')
+def comer_ab():
+    coordPAC = pacman.get_posicionXY_pac()
+    if tablero[pacman.get_posicionX()][pacman.get_posicionY() + 1] == 3:
+        print('comida')
+    elif tablero[pacman.get_posicionX()][pacman.get_posicionY() + 1] == 2:
+        pacman.cambio_de_estado()
+    else:
+        print('no comida')
+def comer_a():
+    coordPAC = pacman.get_posicionXY_pac()
+    if tablero[pacman.get_posicionX()][pacman.get_posicionY() - 1] == 3:
+        print('comida')
+    elif tablero[pacman.get_posicionX()][pacman.get_posicionY() - 1] == 2:
+        pacman.cambio_de_estado()
+    else:
+        print('no comida')
+
+
 # Asignar las funciones de movimiento a las teclas
 def mover_derecha():
+    comer_d()
     mover_jugador(1, 0)
 
 def mover_izquierda():
+    comer_i()
     mover_jugador(-1, 0)
 
 def mover_abajo():
+    comer_ab()
     mover_jugador(0, 1)
 
 def mover_arriba():
+    comer_a()
     mover_jugador(0, -1)
 
 teclas = ['a', 's', 'd', 'w']
@@ -183,7 +226,7 @@ def mover_enemigos():
         nuevo_x = enemigo.posicion_x + movimiento_x
         nuevo_y = enemigo.posicion_y + movimiento_y
 
-        if (0 <= nuevo_x < columnas and 0 <= nuevo_y < filas and tablero2[nuevo_y][nuevo_x] != 0):
+        if (0 <= nuevo_x < columnas and 0 <= nuevo_y < filas and tablero[nuevo_y][nuevo_x] != 0):
             enemigo.posicion_x = nuevo_x
             enemigo.posicion_y = nuevo_y
 
