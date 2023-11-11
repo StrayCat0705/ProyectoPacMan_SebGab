@@ -28,99 +28,13 @@ def ven0():
     # Music
     pygame.mixer.init()
 
-    # Tamaño del tablero
-    filas = 40
-    columnas = 36
-
-    # Crear el tablero inicial
-    tablero = [[0 for _ in range(columnas)] for _ in range(filas)]
-
-    # Establecer los valores iniciales en el tablero
-    # 0: representa una pared
-    # 1: alimento (punto)
-    # 2: cápsula (permite que PacMan se coma los fantasmas por un tiempo determinado)
-    # 3: alimento comida
-
-    # Aquí puedes definir la disposición inicial de las paredes y alimentos
-    # Por ejemplo:
-    # Paredes exteriores
-    for i in range(filas):
-        for j in range(columnas):
-            if i == 0 or i == filas - 1 or j == 0 or j == columnas - 1:
-                tablero[i][j] = 0  # Pared exterior
-
-    # Puedes agregar más elementos al tablero según lo necesites
-    tablero[5][5] = 1  # Alimento
-    tablero[10][10] = 2  # Cápsula
-    tablero[15][15] = 3  # Alimento especial
-
-    # Imprimir el tablero inicial
-    for fila in tablero:
-        print(' '.join(map(str, fila)))
-
-    # Crear instancias de PacMan y Fantasma
-    pacman = PacMan(estado=True, posicion_x=2, posicion_y=2, velocidad=1)
-    fantasma_rojo = Fantasma(estado=True, posicion_x=20, posicion_y=20, color='rojo')    
-
-    class Personaje:
-            def __init__(self, estado, posicion_x, posicion_y, velocidad):
-                self.estado = estado
-                self.posicion_x = posicion_x
-                self.posicion_y = posicion_y
-                self.velocidad = velocidad
-
-            def mover_izquierda(self):
-                if self.posicion_y > 0:
-                    self.posicion_y -= 1
-
-            def mover_derecha(self):
-                if self.posicion_y < columnas - 1:
-                    self.posicion_y += 1
-
-            def mover_arriba(self):
-                if self.posicion_x > 0:
-                    self.posicion_x -= 1
-
-            def mover_abajo(self):
-                if self.posicion_x < filas - 1:
-                    self.posicion_x += 1
-
-            def comer_alimento(self):
-                # Lógica para comer alimento
-                pass
-
-            def comer_capsula(self):
-                # Lógica para comer cápsula
-                pass
-
-    #Definir clases de enemigos
-    class Fantasma(Personaje):
-        def __init__(self, estado, posicion_x, posicion_y, color):
-            # Velocidad dependiendo del color
-            if color == 'rojo':
-                    velocidad = 'rápido'
-            else:
-                velocidad = 'normal'
-                
-            super().__init__(estado, posicion_x, posicion_y, velocidad)
-
-    class PacMan(Personaje):
-            def __init__(self, estado, posicion_x, posicion_y, velocidad):
-                super().__init__(estado, posicion_x, posicion_y, velocidad)
-
-            def comer_alimento(self):
-                # Lógica específica para PacMan al comer alimento
-                pass
-
-            def comer_capsula(self):
-                # Lógica específica para PacMan al comer cápsula
-                pass
-    class ventanas:
-        def __innit__(self, score, name):
+    class Ventanas:
+        def __init__(self, score, name):
             self.name = name
             self.score = score
+
         def namePantalla(self):
-            #Colores 
+            # Colores
             n_grey = '#242424'
             # Top level
             name_pantalla_TP = tk.Toplevel()
@@ -129,16 +43,18 @@ def ven0():
             name_pantalla_TP.title('PACKUMAN-lvl1')
 
             get_name = StringVar()
-            entry_name = tk.Entry(pantalla_name, width= 50, borderwidth=10,  textvariable = get_name).place(x=450, y=400)
+            entry_name = tk.Entry(name_pantalla_TP, width= 50, borderwidth=10,  textvariable = get_name).place(x=140, y=400)
 
 
             def introducir_name():
                 global Name
                 Name = get_name.get()
                 if isinstance(Name, str):
-                    level_1
+                    #level_1
                     self.name = Name
                     print(Name)
+                    ventana_instance = Ventanas(self.score, self.name)
+                    ventana_instance.level_1()
                 else:
                     print('Nombre no valido')
 
@@ -148,16 +64,40 @@ def ven0():
             # Cerrar la pantalla
             close_ventana_name = tk.Button(name_pantalla_TP, text='X', fg='red', command=name_pantalla_TP.destroy)
             close_ventana_name.place(x=1180, y=0)
-        def highScores(self):
-            print(1)
+
         def settings(self):
             print(2)
+
         def aboutUs(self):
             print(3)
+
         def helpCenter(self):
             print(4)
-        def level_1(self, name, score):
-            print(5, str(name), score)
+
+        def level_1(self):
+            print(5, str(self.name), self.score)
+            ventana_instance = Ventanas(self.score, self.name)
+            ventana_instance.level_2()
+
+        def level_2(self):
+            print(6, str(self.name), self.score)
+
+    # Create instances of the class
+    def namePantalla():
+        ventana_instance = Ventanas(score=0, name="DefaultName")
+        ventana_instance.namePantalla()
+    def highScores():
+        ventana_instance = Ventanas(score=0, name="DefaultName")
+        ventana_instance.namePantalla()
+    def settings():
+        ventana_instance = Ventanas(score=0, name="DefaultName")
+        ventana_instance.namePantalla()
+    def aboutUs():
+        ventana_instance = Ventanas(score=0, name="DefaultName")
+        ventana_instance.namePantalla()
+    def helpCenter():
+        ventana_instance = Ventanas(score=0, name="DefaultName")
+        ventana_instance.namePantalla()
 
     #Botones
     play_button = Button(r, text='PLAY', font='Courier 14', command=namePantalla)
