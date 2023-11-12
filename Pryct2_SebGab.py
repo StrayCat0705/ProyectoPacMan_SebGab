@@ -10,6 +10,7 @@ import random
 import pygame 
 import time 
 import keyboard
+import os
 
 #Definir la pantalla del juego 
 def ven0():
@@ -30,6 +31,18 @@ def ven0():
     pygame.mixer.init()
 
     class Ventanas:
+        def game_over():
+            #TopLevel
+            gameOver = tk.Toplevel()
+            gameOver.geometry('1200x800')
+            gameOver.config(bg='red')
+            gameOver.title('ROBOTS-Gameover')
+            #Canvas de lvl1
+            gameover_canvas = Canvas(gameOver, width=1200, height=800, bg='red')
+            gameover_canvas.pack()
+            #Texto
+            gameover_canvas.create_text(600, 400, text='GAME OVER', font='Verdana 85', fill='black')
+
         def namePantalla(self):
             # Top level
             name_pantalla_TP = tk.Toplevel()
@@ -59,20 +72,108 @@ def ven0():
             close_ventana_name = tk.Button(name_pantalla_TP, text='X', fg='red', command=name_pantalla_TP.destroy)
             close_ventana_name.place(x=1180, y=0)
 
-        def settings(self):
-            print(2)
-
         def aboutUs(self):
-            print(3)
+            #Top level
+            about_us = tk.Toplevel()
+            about_us.geometry('1200x700')
+            about_us.config(bg='#242424')
+            about_us.title('About Us')
+            #Texto
+            name1_label = Label(about_us, text = 'Nombre: Sebastian Delgado Brenes' , font = 'Terminal')
+            name1_label.place(x = 150, y = 300)
+            num1_label = Label(about_us, text = '2023086378', font = 'Terminal')
+            num1_label.place(x = 150, y = 350)
+            name2_label = Label(about_us, text = 'Nombre: Gabriel Arias Lara' , font = 'Terminal')
+            name2_label.place(x = 650, y = 300)
+            num2_label = Label(about_us, text = '2023086378', font = 'Terminal')
+            num2_label.place(x = 650, y = 350)
+            carrera_label = Label(about_us, text = 'Ingenieria en computadores', font = 'Terminal')
+            carrera_label.place(x = 450, y = 400)
+            curso_label = Label(about_us, text = 'Introduccion a la programación', font = 'Terminal')
+            curso_label.place(x = 420, y = 450)
+            ano_label = Label(about_us, text = '2023', font = 'Terminal')
+            ano_label.place(x = 570, y = 500)
+            prof_label = Label(about_us, text = 'Profesor Jeff Schmidt', font = 'Terminal')
+            prof_label.place(x = 460, y = 550)
+            pais_label = Label(about_us, text = 'Costa Rica', font = 'Terminal')
+            pais_label.place(x = 530, y = 600)
+            pais_label = Label(about_us, text = 'ver.1.0', font = 'Terminal')
+            pais_label.place(x = 550, y = 650)
+            #Imagenes 
+            image_path = os.path.abspath('Sebas.png')
+            sebas = PhotoImage(file=image_path)
+            label_bg1 = Label(about_us, image=sebas)
+            label_bg1.place(x=300, y=50)
+            image_path = os.path.abspath('Ali.png')
+            ali = PhotoImage(file=image_path)
+            label_bg1 = Label(about_us, image=ali)
+            label_bg1.place(x=720, y=25)
+            about_us.update()
+
+            about_us.mainloop()
 
         def helpCenter(self):
-            print(4)
+            #Top level
+            help_center = tk.Toplevel()
+            help_center.geometry('1200x700')
+            help_center.config(bg='#242424')
+            help_center.title('About Us')
+            #texto
+            historia_label = Label(help_center, text = 
+            '''PacMan es un videojuego arcade creado por el diseñador de videojuegos Toru Iwatani de
+            la empresa Namco, y distribuido por Midway Games al mercado estadounidense a
+            principios de los años 1980.''' , font = 'Terminal')
+            historia_label.place(x = 50, y = 500)
+            controles_label = Label(help_center, text = 
+            '''Utiliza WASD para navegar!''' , font = 'Terminal')
+            controles_label.place(x = 450, y = 300)
+            #Imagenes
+            image_path = os.path.abspath('WASD.png')
+            wasd = PhotoImage(file=image_path)
+            label_bg1 = Label(help_center, image=wasd)
+            label_bg1.place(x=500, y=50)
+
+            help_center.mainloop()
         
         def highScores(self):
-            print(7)
+            salon_fama = tk.Toplevel(r)
+            salon_fama.geometry('1200x675')
+            salon_fama.title('Pantalla_name')
+
+            file = open('database_scores.txt', 'r')
+            read = file.readlines()
+            
+            read.sort(reverse = True)
+            score1 = read[0]
+            score2 = read[1]
+            score3 = read[2]
+            score4 = read[3]
+            score5 = read[4]
+            score6 = read[5]
+            score7 = read[6]
+
+            score1_label = Label(salon_fama, text = "1." + str(score1), font = 'Terminal')
+            score1_label.place(x = 530, y = 250)
+            score2_label = Label(salon_fama, text = "2." + str(score2), font = 'Terminal')
+            score2_label.place(x = 530, y = 300)
+            score3_label = Label(salon_fama, text = "3." + str(score3), font = 'Terminal')
+            score3_label.place(x = 530, y = 350)
+            score1_label = Label(salon_fama, text = "4." + str(score4), font = 'Terminal')
+            score1_label.place(x = 530, y = 400)
+            score2_label = Label(salon_fama, text = "5." + str(score5), font = 'Terminal')
+            score2_label.place(x = 530, y = 450)
+            score3_label = Label(salon_fama, text = "6." + str(score6), font = 'Terminal')
+            score3_label.place(x = 530, y = 500)
+            score3_label = Label(salon_fama, text = "7." + str(score7), font = 'Terminal')
+            score3_label.place(x = 530, y = 550)
+
+            Title_label = Label(salon_fama, text = "Estos son los 7 mejores puntajes:", font = 'Terminal 25', fg = '#0E52C9', height= 2)
+            Title_label.place(x = 210, y = 70)        
+
+            close_pantalla_puntajes = Button(salon_fama, text='X', fg='red', command=salon_fama.destroy).place(x =1180, y =0)
 
         def level_1(self):
-            global score
+            global score, Name
             #Variables
             lives = 3
             enemies = 5
@@ -91,6 +192,10 @@ def ven0():
             if comida == 0:
                 ventana_instance = Ventanas()
                 ventana_instance.level_2(enemies)
+            #Condicion de game over 
+            if lives == 0:
+                ventana_instance = Ventanas()
+                ventana_instance.game_over()
             #Frame
             info_frame = tk.Frame(level1, bg=white)
             info_frame.pack() 
@@ -375,12 +480,14 @@ def ven0():
                 if tablero[pacmanX][pacmanY] == 2:
                     pacman.change_estado(1)
                     score += 0.50
+                    comida-=1
                     score_text.config(text='Score: ' + str(score), bg='white')
                     time.sleep(15)
                     pacman.change_estado(2)
                     tablero[pacmanX - 1][pacmanY] = 3 
                 elif tablero[pacmanX][pacmanY] == 3:
                     score += 0.50
+                    comida-=1
                     score_text.config(text='Score: ' + str(score), bg='white')
                     tablero[pacmanX - 1][pacmanY] =  4
             def comer_I():
@@ -390,12 +497,14 @@ def ven0():
                 if tablero[pacmanX][pacmanY] == 2:
                     pacman.change_estado(1)
                     score += 0.50
+                    comida-=1
                     score_text.config(text='Score: ' + str(score), bg='white')
                     time.sleep(15)
                     pacman.change_estado(2)
                     tablero[pacmanX + 1][pacmanY] = 0 
                 elif tablero[pacmanX][pacmanY] == 3:
                     score += 0.50
+                    comida-=1
                     score_text.config(text='Score: ' + str(score), bg='white')
                     tablero[pacmanX + 1][pacmanY] = 4 
             def comer_AB():
@@ -405,12 +514,14 @@ def ven0():
                 if tablero[pacmanX][pacmanY] == 2:
                     pacman.change_estado(1)
                     score += 0.50
+                    comida-=1
                     score_text.config(text='Score: ' + str(score), bg='white')
                     time.sleep(15)
                     pacman.change_estado(2)
                     tablero[pacmanX][pacmanY - 1] = 0
                 elif tablero[pacmanX][pacmanY] == 3:
                     score += 0.50
+                    comida-=1
                     score_text.config(text='Score: ' + str(score), bg='white')
                     tablero[pacmanX][pacmanY - 1] = 4
             def comer_A():
@@ -420,12 +531,14 @@ def ven0():
                 if tablero[pacmanX][pacmanY] == 2:
                     pacman.change_estado(1)
                     score += 0.50
+                    comida-=1
                     score_text.config(text='Score: ' + str(score), bg='white')
                     time.sleep(15)
                     pacman.change_estado(2)
                     tablero[pacmanX][pacmanY + 1] = 0
                 elif tablero[pacmanX][pacmanY] == 3:
                     score += 0.50
+                    comida-=1
                     score_text.config(text='Score: ' + str(score), bg='white')
                     tablero[pacmanX][pacmanY + 1] = 0 
 
@@ -517,7 +630,7 @@ def ven0():
 
 
         def level_2(self, enemies):
-            global score
+            global score, Name
             #Variables
             lives = 3
             enemies = 5
@@ -531,10 +644,18 @@ def ven0():
             #Canvas de lvl1
             level2_canvas = Canvas(level2, width=360, height=400, bg= 'black')
             level2_canvas.pack()
-            #Condicion para que se abra el segundo nivel 
+            #Condicion para que se abra el salon de la fama 
             if comida == 0:
-                ventana_instance = Ventanas(self.score, self.name)
-                ventana_instance.level_2(enemies)
+                file = open('database_scores.txt', 'a')
+                entry = str(score) + ' ' + str(Name) + '\n'
+                file.write(entry)
+                file.close()
+                ventana_instance = Ventanas()
+                ventana_instance.highScores()
+            #Condicion de game over 
+            if lives == 0:
+                ventana_instance = Ventanas()
+                ventana_instance.game_over()
             #Frame
             info_frame = tk.Frame(level2, bg=white)
             info_frame.pack() 
@@ -839,12 +960,14 @@ def ven0():
                 if tablero[pacmanX][pacmanY] == 2:
                     pacman.change_estado(1)
                     score += 0.50
+                    comida-=1
                     score_text.config(text='Score: ' + str(score), bg='white')
                     time.sleep(15)
                     pacman.change_estado(2)
                     tablero[pacmanX - 1][pacmanY] = 3 
                 elif tablero[pacmanX][pacmanY] == 3:
                     score += 0.50
+                    comida-=1
                     score_text.config(text='Score: ' + str(score), bg='white')
                     tablero[pacmanX - 1][pacmanY] =  4
             def comer_I():
@@ -854,12 +977,14 @@ def ven0():
                 if tablero[pacmanX][pacmanY] == 2:
                     pacman.change_estado(1)
                     score += 0.50
+                    comida-=1
                     score_text.config(text='Score: ' + str(score), bg='white')
                     time.sleep(15)
                     pacman.change_estado(2)
                     tablero[pacmanX + 1][pacmanY] = 0 
                 elif tablero[pacmanX][pacmanY] == 3:
                     score += 0.50
+                    comida-=1
                     score_text.config(text='Score: ' + str(score), bg='white')
                     tablero[pacmanX + 1][pacmanY] = 4 
             def comer_AB():
@@ -869,12 +994,14 @@ def ven0():
                 if tablero[pacmanX][pacmanY] == 2:
                     pacman.change_estado(1)
                     score += 0.50
+                    comida-=1
                     score_text.config(text='Score: ' + str(score), bg='white')
                     time.sleep(15)
                     pacman.change_estado(2)
                     tablero[pacmanX][pacmanY - 1] = 0
                 elif tablero[pacmanX][pacmanY] == 3:
                     score += 0.50
+                    comida-=1
                     score_text.config(text='Score: ' + str(score), bg='white')
                     tablero[pacmanX][pacmanY - 1] = 4
             def comer_A():
@@ -884,12 +1011,14 @@ def ven0():
                 if tablero[pacmanX][pacmanY] == 2:
                     pacman.change_estado(1)
                     score += 0.50
+                    comida-=1
                     score_text.config(text='Score: ' + str(score), bg='white')
                     time.sleep(15)
                     pacman.change_estado(2)
                     tablero[pacmanX][pacmanY + 1] = 0
                 elif tablero[pacmanX][pacmanY] == 3:
                     score += 0.50
+                    comida-=1
                     score_text.config(text='Score: ' + str(score), bg='white')
                     tablero[pacmanX][pacmanY + 1] = 0 
 
@@ -971,9 +1100,6 @@ def ven0():
     def highScores():
         ventana_instance = Ventanas()
         ventana_instance.highScores()
-    def settings():
-        ventana_instance = Ventanas()
-        ventana_instance.settings()
     def aboutUs():
         ventana_instance = Ventanas()
         ventana_instance.aboutUs()
@@ -985,13 +1111,11 @@ def ven0():
     play_button = Button(r, text='PLAY', font='Courier 13', command=namePantalla)
     play_button.config(width=13, height=3)
     score_button = Button(r, text='High scores', font='Courier', command=highScores)
-    config_button = Button(r, text='Settings', font='Courier', command=settings)
     info_button = Button(r, text='About us', font='Courier', command=aboutUs)
     help_button = Button(r, text='Help', command=helpCenter)
     play_window = mainmenu_canvas.create_window(600, 460, anchor="center", window=play_button)
     score_window = mainmenu_canvas.create_window(600, 510, anchor="n", window=score_button)
-    config_window = mainmenu_canvas.create_window(600, 550, anchor="n", window=config_button)
-    info_window = mainmenu_canvas.create_window(600, 590, anchor="n", window=info_button)
+    info_window = mainmenu_canvas.create_window(600, 550, anchor="n", window=info_button)
     help_window = mainmenu_canvas.create_window(1150, 600, anchor="n", window=help_button)
 
     r.mainloop()
