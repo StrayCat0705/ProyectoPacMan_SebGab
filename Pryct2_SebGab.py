@@ -30,21 +30,6 @@ def ven0():
     pygame.mixer.init()
 
     class Ventanas:
-        def __init__(self, score, name):
-            self.name = name
-            self.score = score
-        def get_score(self):
-            return self.score
-        def add_foodScore(self, n):
-            if n == 0:
-                self.score += 1
-            elif n == 2:
-                self.score += 10
-            else:
-                self.score += 2
-        def get_name(self):
-                return self.name
-        
         def namePantalla(self):
             # Top level
             name_pantalla_TP = tk.Toplevel()
@@ -62,7 +47,7 @@ def ven0():
                     #level_1
                     self.name = Name
                     print(Name)
-                    ventana_instance = Ventanas(self.score, self.name)
+                    ventana_instance = Ventanas()
                     ventana_instance.level_1()
                 else:
                     print('Nombre no valido')
@@ -89,11 +74,13 @@ def ven0():
         
 
         def level_1(self):
+            global score
             #Variables
             lives = 3
             enemies = 5
             high_score = 999999999
-            comida = 0
+            comida = 618
+            score = 0
             #Top level
             level1 = tk.Toplevel()
             level1.geometry('360x450')
@@ -103,14 +90,19 @@ def ven0():
             level1_canvas = Canvas(level1, width=360, height=400, bg= 'black')
             level1_canvas.pack()
             #Condicion para que se abra el segundo nivel 
+<<<<<<< HEAD
             if comida == 10:
                 ventana_instance = Ventanas(self.score, self.name)
+=======
+            if comida == 0:
+                ventana_instance = Ventanas()
+>>>>>>> e5648ac4b153554aea299bcfafad4a4cb8763fca
                 ventana_instance.level_2(enemies)
             #Frame
             info_frame = tk.Frame(level1, bg=white)
             info_frame.pack() 
             #Texto 
-            score_text = tk.Label(info_frame, text='Score: ' + str(self.score), bg=white)
+            score_text = tk.Label(info_frame, text='Score: ' + str(score), bg=white)
             score_text.grid(row=0, column=0, padx=10)
             lives_text = tk.Label(info_frame, text='Lives: ' + str(lives), bg=white)
             lives_text.grid(row=0, column=1, padx=10) 
@@ -170,6 +162,10 @@ def ven0():
                             x2 = x1 + 10
                             y2 = y1 + 10
                             level1_canvas.create_rectangle(x1, y1, x2, y2, fill="blue")
+<<<<<<< HEAD
+=======
+
+>>>>>>> e5648ac4b153554aea299bcfafad4a4cb8763fca
             dibujar_cuadros_desde_matriz(tablero)
             def on_key_press(event):
                 key = event.keysym
@@ -313,6 +309,7 @@ def ven0():
 
             #Colisiones
             def colision_D():
+                global score
                 pacmanCoords = pacman.get_posX() + 1, pacman.get_posY()
                 i = 0
                 n = len(enemigos)
@@ -320,10 +317,10 @@ def ven0():
                     if i == n:
                         break
                     if pacman.get_estado() == 'comer':
-                        if pacmanCoords == enemigos[i].get_coords():
+                        if pacmanCoords== enemigos[i].get_coords():
                             print('colision')
-                            ventana_instance = Ventanas(score=0, name="DefaultName")
-                            ventana_instance.add_foodScore(2)
+                            score += 2.5
+                            score_text.config(text='Score: ' + str(score), bg='white')
                             i  += 1
                         else:
                             print('no colision')
@@ -339,6 +336,7 @@ def ven0():
                             i += 1
 
             def colision_I():
+                global score
                 pacmanCoords = pacman.get_posX() - 1, pacman.get_posY()
                 i = 0
                 n = len(enemigos)
@@ -346,10 +344,10 @@ def ven0():
                     if i == n:
                         break
                     if pacman.get_estado() == 'comer':
-                        if pacmanCoords == enemigos[i].get_coords():
+                        if pacmanCoords== enemigos[i].get_coords():
                             print('colision')
-                            ventana_instance = Ventanas(score=0, name="DefaultName")
-                            ventana_instance.add_foodScore(2)
+                            score += 2.5
+                            score_text.config(text='Score: ' + str(score), bg='white')
                             i  += 1
                         else:
                             print('no colision')
@@ -363,7 +361,9 @@ def ven0():
                         else:
                             print('no colision')
                             i += 1
+
             def colision_AB():
+                global score
                 pacmanCoords = pacman.get_posX(), pacman.get_posY() + 1
                 i = 0
                 n = len(enemigos)
@@ -371,10 +371,10 @@ def ven0():
                     if i == n:
                         break
                     if pacman.get_estado() == 'comer':
-                        if pacmanCoords == enemigos[i].get_coords():
+                        if pacmanCoords== enemigos[i].get_coords():
                             print('colision')
-                            ventana_instance = Ventanas(score=0, name="DefaultName")
-                            ventana_instance.add_foodScore(2)
+                            score += 2.5
+                            score_text.config(text='Score: ' + str(score), bg='white')
                             i  += 1
                         else:
                             print('no colision')
@@ -389,6 +389,7 @@ def ven0():
                             print('no colision')
                             i += 1
             def colision_A():
+                global score
                 pacmanCoords = pacman.get_posX(), pacman.get_posY() - 1
                 i = 0
                 n = len(enemigos)
@@ -396,10 +397,10 @@ def ven0():
                     if i == n:
                         break
                     if pacman.get_estado() == 'comer':
-                        if pacmanCoords == enemigos[i].get_coords():
+                        if pacmanCoords== enemigos[i].get_coords():
                             print('colision')
-                            ventana_instance = Ventanas(score=0, name="DefaultName")
-                            ventana_instance.add_foodScore(2)
+                            score += 2.5
+                            score_text.config(text='Score: ' + str(score), bg='white')
                             i  += 1
                         else:
                             print('no colision')
@@ -414,29 +415,103 @@ def ven0():
                             print('no colision')
                             i += 1
 
+            #Comer 
+            def comer_D():
+                global score
+                pacmanX = pacman.get_posX() + 1
+                pacmanY = pacman.get_posY()
+                if tablero[pacmanX][pacmanY] == 2:
+                    pacman.change_estado(1)
+                    score += 0.50
+                    score_text.config(text='Score: ' + str(score), bg='white')
+                    time.sleep(15)
+                    pacman.change_estado(2)
+                    tablero[pacmanX - 1][pacmanY] = 0 
+                elif tablero[pacmanX][pacmanY] == 3:
+                    score += 0.50
+                    score_text.config(text='Score: ' + str(score), bg='white')
+                    tablero[pacmanX - 1][pacmanY] = 0 
+            def comer_I():
+                global score
+                pacmanX = pacman.get_posX() - 1
+                pacmanY = pacman.get_posY()
+                if tablero[pacmanX][pacmanY] == 2:
+                    pacman.change_estado(1)
+                    score += 0.50
+                    score_text.config(text='Score: ' + str(score), bg='white')
+                    time.sleep(15)
+                    pacman.change_estado(2)
+                    tablero[pacmanX + 1][pacmanY] = 0 
+                elif tablero[pacmanX][pacmanY] == 3:
+                    score += 0.50
+                    score_text.config(text='Score: ' + str(score), bg='white')
+                    tablero[pacmanX + 1][pacmanY] = 0 
+            def comer_AB():
+                global score
+                pacmanX = pacman.get_posX() 
+                pacmanY = pacman.get_posY() + 1
+                if tablero[pacmanX][pacmanY] == 2:
+                    pacman.change_estado(1)
+                    score += 0.50
+                    score_text.config(text='Score: ' + str(score), bg='white')
+                    time.sleep(15)
+                    pacman.change_estado(2)
+                    tablero[pacmanX][pacmanY - 1] = 0
+                elif tablero[pacmanX][pacmanY] == 3:
+                    score += 0.50
+                    score_text.config(text='Score: ' + str(score), bg='white')
+                    tablero[pacmanX][pacmanY - 1] = 0 
+            def comer_A():
+                global score
+                pacmanX = pacman.get_posX() 
+                pacmanY = pacman.get_posY() - 1
+                if tablero[pacmanX][pacmanY] == 2:
+                    pacman.change_estado(1)
+                    score += 0.50
+                    score_text.config(text='Score: ' + str(score), bg='white')
+                    time.sleep(15)
+                    pacman.change_estado(2)
+                    tablero[pacmanX][pacmanY + 1] = 0
+                elif tablero[pacmanX][pacmanY] == 3:
+                    score += 0.50
+                    score_text.config(text='Score: ' + str(score), bg='white')
+                    tablero[pacmanX][pacmanY + 1] = 0 
+
+            def puede_mover(x, y):
+                return 0 <= x < 36 and 0 <= y < 40 and tablero[y][x] != 0 and not any(enemigo.posicion_x == x and enemigo.posicion_y == y for enemigo in enemigos)
+
             # Función para mover al jugador
             def mover_jugador(dx, dy):
                 nuevo_x = pacman.posicion_x + dx
                 nuevo_y = pacman.posicion_y + dy
-                pacman.posicion_x = nuevo_x
-                pacman.posicion_y = nuevo_y
-                imprimir_matriz()
+                print('prueba')
+                if puede_mover(nuevo_x, nuevo_y):
+                    pacman.posicion_x = nuevo_x
+                    pacman.posicion_y = nuevo_y
+                    imprimir_matriz()
+                    print('no toca pared')
+                else:
+                    print('toca pared')
 
             # Asignar las funciones de movimiento a las teclas
             def mover_derecha():
                 colision_D()
+                comer_D()
                 mover_jugador(+1, 0)
 
             def mover_izquierda():
                 colision_I()
+                comer_I()
                 mover_jugador(-1, 0)
 
             def mover_abajo():
                 colision_AB()
+                comer_AB()
                 mover_jugador(0, +1)
 
             def mover_arriba():
                 colision_A()
+                comer_A()
                 mover_jugador(0, -1)
 
             teclas = ['a', 's', 'd', 'w']
@@ -470,6 +545,7 @@ def ven0():
                 # Borrar todos los elementos en el canvas
                 level1_canvas.delete("all")
 
+<<<<<<< HEAD
                 # Dibujar las paredes y otros elementos desde la matriz
                 dibujar_cuadros_desde_matriz(tablero)
 
@@ -507,12 +583,15 @@ def ven0():
 
             # Dibujar los personajes inicialmente
             dibujar_personajes()
+=======
+>>>>>>> e5648ac4b153554aea299bcfafad4a4cb8763fca
         def level_2(self, enemies):
+            global score
             #Variables
             lives = 3
             enemies = 5
             high_score = 999999999
-            comida = 10
+            comida = 618
             #Top level
             level2 = tk.Toplevel()
             level2.geometry('360x450')
@@ -538,7 +617,11 @@ def ven0():
             scores_text = tk.Label(info_frame, text='High Score: ' + str(high_score), bg=white)
             scores_text.grid(row=0, column=3, padx=10)
             #Matriz 
+<<<<<<< HEAD
             tablero =  [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+=======
+            tablero = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+>>>>>>> e5648ac4b153554aea299bcfafad4a4cb8763fca
                         [0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0], 
                         [0, 3, 0, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0, 0, 0, 3, 0], 
                         [0, 3, 0, 4, 4, 0, 3, 0, 4, 0, 3, 0, 4, 4, 4, 4, 0, 3, 0, 4, 4, 4, 4, 0, 3, 0, 4, 0, 3, 0, 4, 4, 4, 0, 3, 0], 
@@ -696,6 +779,7 @@ def ven0():
 
             #Colisiones
             def colision_D():
+                global score
                 pacmanCoords = pacman.get_posX() + 1, pacman.get_posY()
                 i = 0
                 n = len(enemigos)
@@ -703,10 +787,10 @@ def ven0():
                     if i == n:
                         break
                     if pacman.get_estado() == 'comer':
-                        if pacmanCoords == enemigos[i].get_coords():
+                        if pacmanCoords== enemigos[i].get_coords():
                             print('colision')
-                            ventana_instance = Ventanas(score=0, name="DefaultName")
-                            ventana_instance.add_foodScore(2)
+                            score += 2.5
+                            score_text.config(text='Score: ' + str(score), bg='white')
                             i  += 1
                         else:
                             print('no colision')
@@ -722,6 +806,7 @@ def ven0():
                             i += 1
 
             def colision_I():
+                global score
                 pacmanCoords = pacman.get_posX() - 1, pacman.get_posY()
                 i = 0
                 n = len(enemigos)
@@ -729,10 +814,10 @@ def ven0():
                     if i == n:
                         break
                     if pacman.get_estado() == 'comer':
-                        if pacmanCoords == enemigos[i].get_coords():
+                        if pacmanCoords== enemigos[i].get_coords():
                             print('colision')
-                            ventana_instance = Ventanas(score=0, name="DefaultName")
-                            ventana_instance.add_foodScore(2)
+                            score += 2.5
+                            score_text.config(text='Score: ' + str(score), bg='white')
                             i  += 1
                         else:
                             print('no colision')
@@ -746,7 +831,9 @@ def ven0():
                         else:
                             print('no colision')
                             i += 1
+
             def colision_AB():
+                global score
                 pacmanCoords = pacman.get_posX(), pacman.get_posY() + 1
                 i = 0
                 n = len(enemigos)
@@ -754,10 +841,10 @@ def ven0():
                     if i == n:
                         break
                     if pacman.get_estado() == 'comer':
-                        if pacmanCoords == enemigos[i].get_coords():
+                        if pacmanCoords== enemigos[i].get_coords():
                             print('colision')
-                            ventana_instance = Ventanas(score=0, name="DefaultName")
-                            ventana_instance.add_foodScore(2)
+                            score += 2.5
+                            score_text.config(text='Score: ' + str(score), bg='white')
                             i  += 1
                         else:
                             print('no colision')
@@ -772,6 +859,7 @@ def ven0():
                             print('no colision')
                             i += 1
             def colision_A():
+                global score
                 pacmanCoords = pacman.get_posX(), pacman.get_posY() - 1
                 i = 0
                 n = len(enemigos)
@@ -779,10 +867,10 @@ def ven0():
                     if i == n:
                         break
                     if pacman.get_estado() == 'comer':
-                        if pacmanCoords == enemigos[i].get_coords():
+                        if pacmanCoords== enemigos[i].get_coords():
                             print('colision')
-                            ventana_instance = Ventanas(score=0, name="DefaultName")
-                            ventana_instance.add_foodScore(2)
+                            score += 2.5
+                            score_text.config(text='Score: ' + str(score), bg='white')
                             i  += 1
                         else:
                             print('no colision')
@@ -797,29 +885,103 @@ def ven0():
                             print('no colision')
                             i += 1
 
+            #Comer 
+            def comer_D():
+                global score
+                pacmanX = pacman.get_posX() + 1
+                pacmanY = pacman.get_posY()
+                if tablero[pacmanX][pacmanY] == 2:
+                    pacman.change_estado(1)
+                    score += 0.50
+                    score_text.config(text='Score: ' + str(score), bg='white')
+                    time.sleep(15)
+                    pacman.change_estado(2)
+                    tablero[pacmanX - 1][pacmanY] = 0 
+                elif tablero[pacmanX][pacmanY] == 3:
+                    score += 0.50
+                    score_text.config(text='Score: ' + str(score), bg='white')
+                    tablero[pacmanX - 1][pacmanY] = 0 
+            def comer_I():
+                global score
+                pacmanX = pacman.get_posX() - 1
+                pacmanY = pacman.get_posY()
+                if tablero[pacmanX][pacmanY] == 2:
+                    pacman.change_estado(1)
+                    score += 0.50
+                    score_text.config(text='Score: ' + str(score), bg='white')
+                    time.sleep(15)
+                    pacman.change_estado(2)
+                    tablero[pacmanX + 1][pacmanY] = 0 
+                elif tablero[pacmanX][pacmanY] == 3:
+                    score += 0.50
+                    score_text.config(text='Score: ' + str(score), bg='white')
+                    tablero[pacmanX + 1][pacmanY] = 0 
+            def comer_AB():
+                global score
+                pacmanX = pacman.get_posX() 
+                pacmanY = pacman.get_posY() + 1
+                if tablero[pacmanX][pacmanY] == 2:
+                    pacman.change_estado(1)
+                    score += 0.50
+                    score_text.config(text='Score: ' + str(score), bg='white')
+                    time.sleep(15)
+                    pacman.change_estado(2)
+                    tablero[pacmanX][pacmanY - 1] = 0
+                elif tablero[pacmanX][pacmanY] == 3:
+                    score += 0.50
+                    score_text.config(text='Score: ' + str(score), bg='white')
+                    tablero[pacmanX][pacmanY - 1] = 0 
+            def comer_A():
+                global score
+                pacmanX = pacman.get_posX() 
+                pacmanY = pacman.get_posY() - 1
+                if tablero[pacmanX][pacmanY] == 2:
+                    pacman.change_estado(1)
+                    score += 0.50
+                    score_text.config(text='Score: ' + str(score), bg='white')
+                    time.sleep(15)
+                    pacman.change_estado(2)
+                    tablero[pacmanX][pacmanY + 1] = 0
+                elif tablero[pacmanX][pacmanY] == 3:
+                    score += 0.50
+                    score_text.config(text='Score: ' + str(score), bg='white')
+                    tablero[pacmanX][pacmanY + 1] = 0 
+                
+            def puede_mover(x, y):
+                return 0 <= x < 36 and 0 <= y < 40 and tablero[y][x] != 0 and not any(enemigo.posicion_x == x and enemigo.posicion_y == y for enemigo in enemigos)
+
             # Función para mover al jugador
             def mover_jugador(dx, dy):
                 nuevo_x = pacman.posicion_x + dx
                 nuevo_y = pacman.posicion_y + dy
-                pacman.posicion_x = nuevo_x
-                pacman.posicion_y = nuevo_y
-                imprimir_matriz()
+                print('prueba')
+                if puede_mover(nuevo_x, nuevo_y):
+                    pacman.posicion_x = nuevo_x
+                    pacman.posicion_y = nuevo_y
+                    imprimir_matriz()
+                    print('no toca pared')
+                else:
+                    print('toca pared')
 
             # Asignar las funciones de movimiento a las teclas
             def mover_derecha():
                 colision_D()
+                comer_D()
                 mover_jugador(+1, 0)
 
             def mover_izquierda():
                 colision_I()
+                comer_I()
                 mover_jugador(-1, 0)
 
             def mover_abajo():
                 colision_AB()
+                comer_AB()
                 mover_jugador(0, +1)
 
             def mover_arriba():
                 colision_A()
+                comer_A()
                 mover_jugador(0, -1)
 
             teclas = ['a', 's', 'd', 'w']
@@ -851,19 +1013,19 @@ def ven0():
 
     #Instancias de las clases 
     def namePantalla():
-        ventana_instance = Ventanas(score=0, name="DefaultName")
+        ventana_instance = Ventanas()
         ventana_instance.namePantalla()
     def highScores():
-        ventana_instance = Ventanas(score=0, name="DefaultName")
+        ventana_instance = Ventanas()
         ventana_instance.highScores()
     def settings():
-        ventana_instance = Ventanas(score=0, name="DefaultName")
+        ventana_instance = Ventanas()
         ventana_instance.settings()
     def aboutUs():
-        ventana_instance = Ventanas(score=0, name="DefaultName")
+        ventana_instance = Ventanas()
         ventana_instance.aboutUs()
     def helpCenter():
-        ventana_instance = Ventanas(score=0, name="DefaultName")
+        ventana_instance = Ventanas()
         ventana_instance.helpCenter()
 
     #Botones
