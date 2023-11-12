@@ -1,12 +1,15 @@
 import keyboard
 import random
+import time
+from threading import Timer
+import copy
 
 # Tamaño del tablero
-filas = 5
-columnas = 5
+filas = 15
+columnas = 15
 
 # Crear el tablero inicial
-tablero = [[4 for _ in range(columnas)] for n in range(filas)]
+tablero = [[4 for _ in range(columnas)] for _ in range(filas)]
 
 # Clase base para los personajes
 class Personaje:
@@ -41,17 +44,43 @@ class Personaje:
         pass
 
 # Clase para PacMan
+
+
+
+# Modificar la clase PacMan
 class PacMan(Personaje):
     def __init__(self, estado, posicion_x, posicion_y, velocidad):
         super().__init__(estado, posicion_x, posicion_y, velocidad)
-
-    def comer_alimento(self):
-        # Lógica específica para PacMan al comer alimento
-        pass
+        self.tiempo_ayuda_activado = False
+# ... (código existente
 
     def comer_capsula(self):
+        global objetos_pizza, enemigos, timer_ayuda
         # Lógica específica para PacMan al comer cápsula
-        pass
+        if (self.posicion_x, self.posicion_y) in objetos_pizza:
+            print("¡Pacman ha comido una pizza! Ahora es un comedor de cheeseburgers.")
+            self.estado = "comedor de cheeseburger"
+            objetos_pizza.remove((self.posicion_x, self.posicion_y))  # Eliminar el objeto "🍕" del tablero
+
+            # Poner en estado "ayuda" a los enemigos y cambiar su representación a "🐶"
+            for enemigo in enemigos:
+                if enemigo.estado != "ayuda":
+                    enemigo.estado = "ayuda"
+                    enemigo.velocidad = 0  # Hacer que los enemigos no se muevan durante el estado "ayuda"
+                    print(f"El fantasma {enemigo.color} está en estado de ayuda.")
+
+            # Crear un temporizador para revertir el estado "ayuda" después de un tiempo
+            def revertir_estado_ayuda():
+                for enemigo in enemigos:
+                    if enemigo.estado == "ayuda":
+                        enemigo.estado = "normal"
+                        enemigo.velocidad = 1  # Restaurar la velocidad normal
+                        print(f"El estado de ayuda del fantasma {enemigo.color} ha terminado.")
+
+            # Programar la reversión del estado "ayuda" después de un tiempo
+            timer_ayuda = Timer(tiempo_ayuda, revertir_estado_ayuda)
+            timer_ayuda.start()
+
 
 # Clase para Fantasma
 class Fantasma(Personaje):
@@ -65,12 +94,28 @@ class Fantasma(Personaje):
         super().__init__(estado, posicion_x, posicion_y, velocidad)
         self.color = color
 
-# Crear una instancia de PacMan y configurar su posición inicial
-pacman = PacMan(estado=True, posicion_x=4, posicion_y=4, velocidad=1)
-# Lista de enemigos (cada enemigo es una instancia de Fantasma)
-enemigos = [Fantasma(estado=True, posicion_x=1, posicion_y=1, color='rojo'),
-            Fantasma(estado=True, posicion_x=1, posicion_y=2, color='normal'),
-            Fantasma(estado=True, posicion_x=1, posicion_y=3, color='normal')]
+    def reaparecer(self):
+        # Reiniciar la posición y estado del fantasma con un color aleatorio
+        self.posicion_x = random.randint(0, columnas - 1)
+        self.posicion_y = random.randint(0, filas - 1)
+        self.estado = "normal"
+        self.color = random.choice(['rosado', 'naranja', 'rojo', 'celeste'])
+
+# Crear instancias de PacMan y Fantasmas
+pacman = PacMan(estado=True, posicion_x=5, posicion_y=5, velocidad=1)
+enemigos = [
+    Fantasma(estado=True, posicion_x=1, posicion_y=1, color='rojo'),
+    Fantasma(estado=True, posicion_x=2, posicion_y=2, color='celeste'),
+    Fantasma(estado=True, posicion_x=3, posicion_y=3, color='rosado'),
+    Fantasma(estado=True, posicion_x=4, posicion_y=4, color='naranja')
+]
+
+# Lista de objetos "🍕"
+objetos_pizza = [(8, 8), (7, 7), (6, 6)]
+
+# Tiempo de duración del estado "ayuda" (en segundos)
+tiempo_ayuda = 10
+
 # Función para imprimir el tablero con separación horizontal
 def imprimir_matriz():
     for n in range(len(tablero)):
@@ -81,10 +126,15 @@ def imprimir_matriz():
             else:
                 for enemigo in enemigos:
                     if n == enemigo.posicion_y and x == enemigo.posicion_x:
-                        row += "👻 "
+                        if enemigo.estado == "ayuda":
+                            row += "🐶 "
+                        else:
+                            row += "👻 "
                         break
                 else:
-                    if tablero[n][x] == 0:
+                    if (x, n) in objetos_pizza:
+                        row += "🍕 "
+                    elif tablero[n][x] == 0:
                         row += "0 "
                     else:
                         row += "4 "
@@ -92,25 +142,52 @@ def imprimir_matriz():
     print(f"posx:{pacman.posicion_x}, posy: {pacman.posicion_y}\n")
 
 # Restringir el movimiento del jugador solo cuando no hay enemigos en la casilla
-def puede_mover(x, y):
-    return (0 <= x < columnas and 0 <= y < filas and tablero[y][x] != 0 and not any(enemigo.posicion_x == x and enemigo.posicion_y == y for enemigo in enemigos))
-
-# Verificar si Pac-Man colisiona con algún enemigo
-def colision_pacman_enemigo():
-    for enemigo in enemigos:
-        if pacman.posicion_x == enemigo.posicion_x and pacman.posicion_y == enemigo.posicion_y:
-            print("¡Colisión! Pac-Man ha sido capturado por un fantasmaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.")
-            # Puedes agregar aquí la lógica para manejar la colisión, como finalizar el juego o reiniciar el nivel.
-
-# Función para mover al jugador
 def mover_jugador(dx, dy):
     nuevo_x = pacman.posicion_x + dx
     nuevo_y = pacman.posicion_y + dy
+
+    pos_x_anterior = pacman.posicion_x
+    pos_y_anterior = pacman.posicion_y
+
     if puede_mover(nuevo_x, nuevo_y):
         pacman.posicion_x = nuevo_x
         pacman.posicion_y = nuevo_y
-        colision_pacman_enemigo()  # Verificar colisión después de mover a Pac-Man
+
+        pacman.comer_capsula()
+
+        # Verificar si hay un fantasma en las nuevas coordenadas
+        for enemigo in enemigos:
+            if enemigo.posicion_x == nuevo_x and enemigo.posicion_y == nuevo_y:
+                manejar_colision_pacman_fantasma(enemigo)
+                break
+
         imprimir_matriz()
+    else:
+        pacman.posicion_x = pos_x_anterior
+        pacman.posicion_y = pos_y_anterior
+# Restringir el movimiento del jugador solo cuando no hay enemigos en la casilla
+
+def manejar_colision_pacman_fantasma(fantasma):
+    if pacman.estado == "comedor de cheeseburger":
+        print(f"Pacman ha comido al fantasma {fantasma.color}!")
+        # Aquí puedes implementar la lógica para eliminar el fantasma de la matriz
+        fantasma.reaparecer()  # Puedes ajustar esta función según tu lógica de reaparición
+    else:
+        # Aquí puedes implementar la lógica para manejar la colisión cuando PacMan no puede comer al fantasma
+        print(f"Pacman no puede comer al fantasma {fantasma.color}. ¡Huye Pacman!")
+
+
+def puede_mover(x, y):
+    return (
+        0 <= x < columnas
+        and 0 <= y < filas
+        and tablero[y][x] != 0
+        and not any(
+            enemigo.posicion_x == x and enemigo.posicion_y == y for enemigo in enemigos
+        )
+    )
+# Importar la clase Timer para programar eventos temporizados
+from threading import Timer
 
 # Asignar las funciones de movimiento a las teclas
 def mover_derecha():
@@ -146,12 +223,22 @@ def mover_enemigos():
         nuevo_x = enemigo.posicion_x + movimiento_x
         nuevo_y = enemigo.posicion_y + movimiento_y
 
-        if (0 <= nuevo_x < columnas and 0 <= nuevo_y < filas and tablero[nuevo_y][nuevo_x] != 0):
+        if (0 <= nuevo_x < columnas and 0 <= nuevo_y < filas and tablero[nuevo_y][nuevo_x] != 0
+                and nuevo_x != pacman.posicion_x and nuevo_y != pacman.posicion_y):
             enemigo.posicion_x = nuevo_x
             enemigo.posicion_y = nuevo_y
-
 # Bucle principal
 while True:
     mover_enemigos()
     imprimir_matriz()
+
+    # Verificar si el temporizador de ayuda está activado
+    if pacman.tiempo_ayuda_activado:
+        # Verificar si el temporizador ha expirado
+        if not timer_ayuda.is_alive():
+            pacman.tiempo_ayuda_activado = False
+            # Reaparecer los fantasmas con colores aleatorios
+            for enemigo in enemigos:
+                enemigo.reaparecer()
+
     keyboard.read_event()
