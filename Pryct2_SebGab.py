@@ -33,7 +33,18 @@ def ven0():
         def __init__(self, score, name):
             self.name = name
             self.score = score
-
+        def get_score(self):
+            return self.score
+        def add_foodScore(self, n):
+            if n == 0:
+                self.score += 1
+            elif n == 2:
+                self.score += 10
+            else:
+                self.score += 2
+        def get_name(self):
+                return self.name
+        
         def namePantalla(self):
             # Top level
             name_pantalla_TP = tk.Toplevel()
@@ -80,14 +91,14 @@ def ven0():
             lives = 3
             enemies = 5
             high_score = 999999999
-            comida = 10
+            comida = 0
             #Top level
             level1 = tk.Toplevel()
-            level1.geometry('400x400')
+            level1.geometry('360x450')
             level1.config(bg=white)
             level1.title('PUCKMAN-lvl1')
             #Canvas de lvl1
-            level1_canvas = Canvas(level1, width=400, height=360, bg= 'black')
+            level1_canvas = Canvas(level1, width=360, height=400, bg= 'black')
             level1_canvas.pack()
             #Condicion para que se abra el segundo nivel 
             if comida == 0:
@@ -106,6 +117,7 @@ def ven0():
             scores_text = tk.Label(info_frame, text='High Score: ' + str(high_score), bg=white)
             scores_text.grid(row=0, column=3, padx=10)
             #Matriz 
+<<<<<<< HEAD
             matriz =  [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
                         [0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0], 
                         [0, 3, 0, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0, 0, 0, 3, 0], 
@@ -146,6 +158,50 @@ def ven0():
                         [0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 3, 0], 
                         [0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0], 
                         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]
+=======
+            tablero = [
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+                ]
+>>>>>>> 6c152cb119fabd46483b9efadb000499b8f7cba0
             #Mapa 
             def dibujar_cuadros_desde_matriz(matriz):
                 for fila in range(len(matriz)):
@@ -157,7 +213,270 @@ def ven0():
                             x2 = x1 + 10
                             y2 = y1 + 10
                             level1_canvas.create_rectangle(x1, y1, x2, y2, fill="blue")
+<<<<<<< HEAD
             dibujar_cuadros_desde_matriz(matriz)
+=======
+            dibujar_cuadros_desde_matriz(tablero)
+            # Clase base para los personajes
+            class Personaje:
+                def __init__(self, estado, posicion_x, posicion_y, velocidad):
+                    self.estado = estado
+                    self.posicion_x = posicion_x
+                    self.posicion_y = posicion_y
+                    self.velocidad = velocidad
+
+                def mover_izquierda(self):
+                    if self.posicion_y > 0:
+                        self.posicion_y -= 1
+
+                def mover_derecha(self):
+                    if self.posicion_y < 36 - 1:
+                        self.posicion_y += 1
+
+                def mover_arriba(self):
+                    if self.posicion_x > 0:
+                        self.posicion_x -= 1
+
+                def mover_abajo(self):
+                    if self.posicion_x < 40 - 1:
+                        self.posicion_x += 1
+
+                def comer_alimento(self):
+                    # Lógica para comer alimento
+                    pass
+
+                def comer_capsula(self):
+                    # Lógica para comer cápsula
+                    pass
+
+            # Clase para PacMan
+            class PacMan(Personaje):
+                def __init__(self, estado, posicion_x, posicion_y, velocidad):
+                    super().__init__(estado, posicion_x, posicion_y, velocidad)
+                    self.estado = 'ser comido'
+
+                def comer_alimento(self):
+                    # Lógica específica para PacMan al comer alimento
+                    pass
+
+                def comer_capsula(self):
+                    # Lógica específica para PacMan al comer cápsula
+                    pass
+                
+                def get_posX(self):
+                    return self.posicion_x
+                def get_posY(self):
+                    return self.posicion_y
+
+                def get_estado(self):
+                    return self.estado 
+                def change_estado(self, n):
+                    if n == 1:
+                        self.estado = 'comer'
+                    else:
+                        self.estado = 'ser comido'
+
+            # Clase para Fantasma
+            class Fantasma(Personaje):
+                def __init__(self, estado, posicion_x, posicion_y, color):
+                    # Velocidad dependiendo del color
+                    if color == 'rojo':
+                        velocidad = 'rápido'
+                    else:
+                        velocidad = 'normal'
+                    
+                    super().__init__(estado, posicion_x, posicion_y, velocidad)
+                    self.color = color
+                def get_posX(self):
+                    return self.posicion_x
+                def get_posY(self):
+                    return self.posicion_y
+                def get_coords(self):
+                    return self.posicion_x, self.posicion_y
+
+            # Crear una instancia de PacMan y configurar su posición inicial
+            pacman = PacMan(estado=True, posicion_x=5, posicion_y=5, velocidad=1)
+            # Lista de enemigos (cada enemigo es una instancia de Fantasma)
+            enemigos = [Fantasma(estado=True, posicion_x=10, posicion_y=15, color='rojo'),
+                        Fantasma(estado=True, posicion_x=20, posicion_y=25, color='celeste'),
+                        Fantasma(estado=True, posicion_x=30, posicion_y=5, color='rosado'),
+                        Fantasma(estado=True, posicion_x=30, posicion_y=10, color='naranja'),]
+            # Función para imprimir el tablero con separación horizontal
+            def imprimir_matriz():
+                for n in range(len(tablero)):
+                    row = ""
+                    for x in range(len(tablero[0])):
+                        if n == pacman.posicion_y and x == pacman.posicion_x:
+                            row += "6"
+                        else:
+                            for enemigo in enemigos:
+                                if n == enemigo.posicion_y and x == enemigo.posicion_x:
+                                    row += "7"
+                                    break
+                            else:
+                                if tablero[n][x] == 0:
+                                    row += "0 "
+                                else:
+                                    row += "4 "
+                    print(row)
+                print(f"posx:{pacman.posicion_x}, posy: {pacman.posicion_y}\n")
+
+            #Colisiones
+            def colision_D():
+                pacmanCoords = pacman.get_posX() + 1, pacman.get_posY()
+                i = 0
+                n = len(enemigos)
+                while i != n:
+                    if i == n:
+                        break
+                    if pacman.get_estado() == 'comer':
+                        if pacmanCoords == enemigos[i].get_coords():
+                            print('colision')
+                            ventana_instance = Ventanas(score=0, name="DefaultName")
+                            ventana_instance.add_foodScore(2)
+                            i  += 1
+                        else:
+                            print('no colision')
+                            i += 1
+                    else:
+                        if pacmanCoords == enemigos[i].get_coords():
+                            print('colision')
+                            lives -= 1
+                            print(str(lives))
+                            i += 1
+                        else:
+                            print('no colision')
+                            i += 1
+
+            def colision_I():
+                pacmanCoords = pacman.get_posX() - 1, pacman.get_posY()
+                i = 0
+                n = len(enemigos)
+                while i != n:
+                    if i == n:
+                        break
+                    if pacman.get_estado() == 'comer':
+                        if pacmanCoords == enemigos[i].get_coords():
+                            print('colision')
+                            ventana_instance = Ventanas(score=0, name="DefaultName")
+                            ventana_instance.add_foodScore(2)
+                            i  += 1
+                        else:
+                            print('no colision')
+                            i += 1
+                    else:
+                        if pacmanCoords == enemigos[i].get_coords():
+                            print('colision')
+                            lives -= 1
+                            print(str(lives))
+                            i += 1
+                        else:
+                            print('no colision')
+                            i += 1
+            def colision_AB():
+                pacmanCoords = pacman.get_posX(), pacman.get_posY() + 1
+                i = 0
+                n = len(enemigos)
+                while i != n:
+                    if i == n:
+                        break
+                    if pacman.get_estado() == 'comer':
+                        if pacmanCoords == enemigos[i].get_coords():
+                            print('colision')
+                            ventana_instance = Ventanas(score=0, name="DefaultName")
+                            ventana_instance.add_foodScore(2)
+                            i  += 1
+                        else:
+                            print('no colision')
+                            i += 1
+                    else:
+                        if pacmanCoords == enemigos[i].get_coords():
+                            print('colision')
+                            lives -= 1
+                            print(str(lives))
+                            i += 1
+                        else:
+                            print('no colision')
+                            i += 1
+            def colision_A():
+                pacmanCoords = pacman.get_posX(), pacman.get_posY() - 1
+                i = 0
+                n = len(enemigos)
+                while i != n:
+                    if i == n:
+                        break
+                    if pacman.get_estado() == 'comer':
+                        if pacmanCoords == enemigos[i].get_coords():
+                            print('colision')
+                            ventana_instance = Ventanas(score=0, name="DefaultName")
+                            ventana_instance.add_foodScore(2)
+                            i  += 1
+                        else:
+                            print('no colision')
+                            i += 1
+                    else:
+                        if pacmanCoords == enemigos[i].get_coords():
+                            print('colision')
+                            lives -= 1
+                            print(str(lives))
+                            i += 1
+                        else:
+                            print('no colision')
+                            i += 1
+
+            # Función para mover al jugador
+            def mover_jugador(dx, dy):
+                nuevo_x = pacman.posicion_x + dx
+                nuevo_y = pacman.posicion_y + dy
+                pacman.posicion_x = nuevo_x
+                pacman.posicion_y = nuevo_y
+                imprimir_matriz()
+
+            # Asignar las funciones de movimiento a las teclas
+            def mover_derecha():
+                colision_D()
+                mover_jugador(+1, 0)
+
+            def mover_izquierda():
+                colision_I()
+                mover_jugador(-1, 0)
+
+            def mover_abajo():
+                colision_AB()
+                mover_jugador(0, +1)
+
+            def mover_arriba():
+                colision_A()
+                mover_jugador(0, -1)
+
+            teclas = ['a', 's', 'd', 'w']
+
+            for tecla in teclas:
+                if tecla == 'd':
+                    keyboard.add_hotkey(tecla, mover_derecha)
+                elif tecla == 's':
+                    keyboard.add_hotkey(tecla, mover_abajo)
+                elif tecla == 'w':
+                    keyboard.add_hotkey(tecla, mover_arriba)
+                elif tecla == 'a':
+                    keyboard.add_hotkey(tecla, mover_izquierda)
+
+            # Función para mover a los enemigos
+            def mover_enemigos():
+                for enemigo in enemigos:
+                    movimiento_x = random.choice([-1, 0, 1])
+                    movimiento_y = random.choice([-1, 0, 1])
+
+                    nuevo_x = enemigo.posicion_x + movimiento_x
+                    nuevo_y = enemigo.posicion_y + movimiento_y
+
+                    if (0 <= nuevo_x < 36 and 0 <= nuevo_y < 40 and tablero[nuevo_y][nuevo_x] != 0):
+                        enemigo.posicion_x = nuevo_x
+                        enemigo.posicion_y = nuevo_y
+            mover_enemigos()
+            imprimir_matriz()
+
+>>>>>>> 6c152cb119fabd46483b9efadb000499b8f7cba0
         def level_2(self, enemies):
             #Variables
             lives = 3
@@ -166,11 +485,19 @@ def ven0():
             comida = 10
             #Top level
             level2 = tk.Toplevel()
+<<<<<<< HEAD
             level2.geometry('300x300')
             level2.config(bg=white)
             level2.title('PUCKMAN-lvl2')
             #Canvas de lvl1
             level2_canvas = Canvas(level2, width=300, height=360, bg= 'black')
+=======
+            level2.geometry('360x450')
+            level2.config(bg=white)
+            level2.title('PUCKMAN-lvl2')
+            #Canvas de lvl1
+            level2_canvas = Canvas(level2, width=360, height=400, bg= 'black')
+>>>>>>> 6c152cb119fabd46483b9efadb000499b8f7cba0
             level2_canvas.pack()
             #Condicion para que se abra el segundo nivel 
             if comida == 0:
@@ -188,6 +515,319 @@ def ven0():
             enemies_text.grid(row=0, column=2, padx=10)
             scores_text = tk.Label(info_frame, text='High Score: ' + str(high_score), bg=white)
             scores_text.grid(row=0, column=3, padx=10)
+            #Matriz 
+            tablero = [
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+                ]
+            #Mapa 
+            def dibujar_cuadros_desde_matriz(matriz):
+                for fila in range(len(matriz)):
+                    for columna in range(len(matriz[0])):
+                        if matriz[fila][columna] == 0:
+                            # Coordenadas del cuadro en el canvas
+                            x1 = columna * 10
+                            y1 = fila * 10
+                            x2 = x1 + 10
+                            y2 = y1 + 10
+                            level2_canvas.create_rectangle(x1, y1, x2, y2, fill="blue")
+            dibujar_cuadros_desde_matriz(tablero)
+            # Clase base para los personajes
+            class Personaje:
+                def __init__(self, estado, posicion_x, posicion_y, velocidad):
+                    self.estado = estado
+                    self.posicion_x = posicion_x
+                    self.posicion_y = posicion_y
+                    self.velocidad = velocidad
+
+                def mover_izquierda(self):
+                    if self.posicion_y > 0:
+                        self.posicion_y -= 1
+
+                def mover_derecha(self):
+                    if self.posicion_y < 36 - 1:
+                        self.posicion_y += 1
+
+                def mover_arriba(self):
+                    if self.posicion_x > 0:
+                        self.posicion_x -= 1
+
+                def mover_abajo(self):
+                    if self.posicion_x < 40 - 1:
+                        self.posicion_x += 1
+
+                def comer_alimento(self):
+                    # Lógica para comer alimento
+                    pass
+
+                def comer_capsula(self):
+                    # Lógica para comer cápsula
+                    pass
+
+            # Clase para PacMan
+            class PacMan(Personaje):
+                def __init__(self, estado, posicion_x, posicion_y, velocidad):
+                    super().__init__(estado, posicion_x, posicion_y, velocidad)
+                    self.estado = 'ser comido'
+
+                def comer_alimento(self):
+                    # Lógica específica para PacMan al comer alimento
+                    pass
+
+                def comer_capsula(self):
+                    # Lógica específica para PacMan al comer cápsula
+                    pass
+                
+                def get_posX(self):
+                    return self.posicion_x
+                def get_posY(self):
+                    return self.posicion_y
+
+                def get_estado(self):
+                    return self.estado 
+                def change_estado(self, n):
+                    if n == 1:
+                        self.estado = 'comer'
+                    else:
+                        self.estado = 'ser comido'
+
+            # Clase para Fantasma
+            class Fantasma(Personaje):
+                def __init__(self, estado, posicion_x, posicion_y, color):
+                    # Velocidad dependiendo del color
+                    if color == 'rojo':
+                        velocidad = 'rápido'
+                    else:
+                        velocidad = 'normal'
+                    
+                    super().__init__(estado, posicion_x, posicion_y, velocidad)
+                    self.color = color
+                def get_posX(self):
+                    return self.posicion_x
+                def get_posY(self):
+                    return self.posicion_y
+                def get_coords(self):
+                    return self.posicion_x, self.posicion_y
+
+            # Crear una instancia de PacMan y configurar su posición inicial
+            pacman = PacMan(estado=True, posicion_x=5, posicion_y=5, velocidad=1)
+            # Lista de enemigos (cada enemigo es una instancia de Fantasma)
+            enemigos = [Fantasma(estado=True, posicion_x=10, posicion_y=15, color='rojo'),
+                        Fantasma(estado=True, posicion_x=20, posicion_y=25, color='celeste'),
+                        Fantasma(estado=True, posicion_x=30, posicion_y=5, color='rosado'),
+                        Fantasma(estado=True, posicion_x=30, posicion_y=10, color='naranja'),]
+            # Función para imprimir el tablero con separación horizontal
+            def imprimir_matriz():
+                for n in range(len(tablero)):
+                    row = ""
+                    for x in range(len(tablero[0])):
+                        if n == pacman.posicion_y and x == pacman.posicion_x:
+                            row += "6"
+                        else:
+                            for enemigo in enemigos:
+                                if n == enemigo.posicion_y and x == enemigo.posicion_x:
+                                    row += "7"
+                                    break
+                            else:
+                                if tablero[n][x] == 0:
+                                    row += "0 "
+                                else:
+                                    row += "4 "
+                    print(row)
+                print(f"posx:{pacman.posicion_x}, posy: {pacman.posicion_y}\n")
+
+            #Colisiones
+            def colision_D():
+                pacmanCoords = pacman.get_posX() + 1, pacman.get_posY()
+                i = 0
+                n = len(enemigos)
+                while i != n:
+                    if i == n:
+                        break
+                    if pacman.get_estado() == 'comer':
+                        if pacmanCoords == enemigos[i].get_coords():
+                            print('colision')
+                            ventana_instance = Ventanas(score=0, name="DefaultName")
+                            ventana_instance.add_foodScore(2)
+                            i  += 1
+                        else:
+                            print('no colision')
+                            i += 1
+                    else:
+                        if pacmanCoords == enemigos[i].get_coords():
+                            print('colision')
+                            lives -= 1
+                            print(str(lives))
+                            i += 1
+                        else:
+                            print('no colision')
+                            i += 1
+
+            def colision_I():
+                pacmanCoords = pacman.get_posX() - 1, pacman.get_posY()
+                i = 0
+                n = len(enemigos)
+                while i != n:
+                    if i == n:
+                        break
+                    if pacman.get_estado() == 'comer':
+                        if pacmanCoords == enemigos[i].get_coords():
+                            print('colision')
+                            ventana_instance = Ventanas(score=0, name="DefaultName")
+                            ventana_instance.add_foodScore(2)
+                            i  += 1
+                        else:
+                            print('no colision')
+                            i += 1
+                    else:
+                        if pacmanCoords == enemigos[i].get_coords():
+                            print('colision')
+                            lives -= 1
+                            print(str(lives))
+                            i += 1
+                        else:
+                            print('no colision')
+                            i += 1
+            def colision_AB():
+                pacmanCoords = pacman.get_posX(), pacman.get_posY() + 1
+                i = 0
+                n = len(enemigos)
+                while i != n:
+                    if i == n:
+                        break
+                    if pacman.get_estado() == 'comer':
+                        if pacmanCoords == enemigos[i].get_coords():
+                            print('colision')
+                            ventana_instance = Ventanas(score=0, name="DefaultName")
+                            ventana_instance.add_foodScore(2)
+                            i  += 1
+                        else:
+                            print('no colision')
+                            i += 1
+                    else:
+                        if pacmanCoords == enemigos[i].get_coords():
+                            print('colision')
+                            lives -= 1
+                            print(str(lives))
+                            i += 1
+                        else:
+                            print('no colision')
+                            i += 1
+            def colision_A():
+                pacmanCoords = pacman.get_posX(), pacman.get_posY() - 1
+                i = 0
+                n = len(enemigos)
+                while i != n:
+                    if i == n:
+                        break
+                    if pacman.get_estado() == 'comer':
+                        if pacmanCoords == enemigos[i].get_coords():
+                            print('colision')
+                            ventana_instance = Ventanas(score=0, name="DefaultName")
+                            ventana_instance.add_foodScore(2)
+                            i  += 1
+                        else:
+                            print('no colision')
+                            i += 1
+                    else:
+                        if pacmanCoords == enemigos[i].get_coords():
+                            print('colision')
+                            lives -= 1
+                            print(str(lives))
+                            i += 1
+                        else:
+                            print('no colision')
+                            i += 1
+
+            # Función para mover al jugador
+            def mover_jugador(dx, dy):
+                nuevo_x = pacman.posicion_x + dx
+                nuevo_y = pacman.posicion_y + dy
+                pacman.posicion_x = nuevo_x
+                pacman.posicion_y = nuevo_y
+                imprimir_matriz()
+
+            # Asignar las funciones de movimiento a las teclas
+            def mover_derecha():
+                colision_D()
+                mover_jugador(+1, 0)
+
+            def mover_izquierda():
+                colision_I()
+                mover_jugador(-1, 0)
+
+            def mover_abajo():
+                colision_AB()
+                mover_jugador(0, +1)
+
+            def mover_arriba():
+                colision_A()
+                mover_jugador(0, -1)
+
+            teclas = ['a', 's', 'd', 'w']
+
+            for tecla in teclas:
+                if tecla == 'd':
+                    keyboard.add_hotkey(tecla, mover_derecha)
+                elif tecla == 's':
+                    keyboard.add_hotkey(tecla, mover_abajo)
+                elif tecla == 'w':
+                    keyboard.add_hotkey(tecla, mover_arriba)
+                elif tecla == 'a':
+                    keyboard.add_hotkey(tecla, mover_izquierda)
+
+            # Función para mover a los enemigos
+            def mover_enemigos():
+                for enemigo in enemigos:
+                    movimiento_x = random.choice([-1, 0, 1])
+                    movimiento_y = random.choice([-1, 0, 1])
+
+                    nuevo_x = enemigo.posicion_x + movimiento_x
+                    nuevo_y = enemigo.posicion_y + movimiento_y
+
+                    if (0 <= nuevo_x < 36 and 0 <= nuevo_y < 40 and tablero[nuevo_y][nuevo_x] != 0):
+                        enemigo.posicion_x = nuevo_x
+                        enemigo.posicion_y = nuevo_y
+            mover_enemigos()
+            imprimir_matriz()
 
     #Instancias de las clases 
     def namePantalla():
