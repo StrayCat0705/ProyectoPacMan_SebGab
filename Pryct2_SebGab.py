@@ -90,13 +90,12 @@ def ven0():
             level1_canvas = Canvas(level1, width=360, height=400, bg= 'black')
             level1_canvas.pack()
             #Condicion para que se abra el segundo nivel 
-<<<<<<< HEAD
             if comida == 10:
                 ventana_instance = Ventanas(self.score, self.name)
-=======
+
             if comida == 0:
                 ventana_instance = Ventanas()
->>>>>>> e5648ac4b153554aea299bcfafad4a4cb8763fca
+
                 ventana_instance.level_2(enemies)
             #Frame
             info_frame = tk.Frame(level1, bg=white)
@@ -162,10 +161,8 @@ def ven0():
                             x2 = x1 + 10
                             y2 = y1 + 10
                             level1_canvas.create_rectangle(x1, y1, x2, y2, fill="blue")
-<<<<<<< HEAD
-=======
 
->>>>>>> e5648ac4b153554aea299bcfafad4a4cb8763fca
+
             dibujar_cuadros_desde_matriz(tablero)
             def on_key_press(event):
                 key = event.keysym
@@ -545,46 +542,6 @@ def ven0():
                 # Borrar todos los elementos en el canvas
                 level1_canvas.delete("all")
 
-<<<<<<< HEAD
-                # Dibujar las paredes y otros elementos desde la matriz
-                dibujar_cuadros_desde_matriz(tablero)
-
-                # Dibujar PacMan
-                pacman_coords = (pacman.posicion_x * 10, pacman.posicion_y * 10)
-                level1_canvas.create_oval(pacman_coords[1], pacman_coords[0], pacman_coords[1] + 10, pacman_coords[0] + 10, fill="yellow")
-
-                # Dibujar fantasmas
-                for enemigo in enemigos:
-                    enemigo_coords = (enemigo.posicion_x * 10, enemigo.posicion_y * 10)
-                    level1_canvas.create_rectangle(enemigo_coords[1], enemigo_coords[0], enemigo_coords[1] + 10, enemigo_coords[0] + 10, fill="red")
-
-                # Actualizar el canvas
-                level1.update()
-
-            def mover_personajes(event):
-                # Mover PacMan
-                if event.keysym == 'Up':
-                    pacman.mover_arriba()
-                elif event.keysym == 'Down':
-                    pacman.mover_abajo()
-                elif event.keysym == 'Left':
-                    pacman.mover_izquierda()
-                elif event.keysym == 'Right':
-                    pacman.mover_derecha()
-                mover_personajes(event)
-                colision_D()
-                colision_I()
-                colision_AB()
-                dibujar_personajes()
-            level1.bind('<Key>', mover_personajes)
-
-            # Enfocar el canvas para que pueda recibir eventos del teclado
-            level1_canvas.focus_set()
-
-            # Dibujar los personajes inicialmente
-            dibujar_personajes()
-=======
->>>>>>> e5648ac4b153554aea299bcfafad4a4cb8763fca
         def level_2(self, enemies):
             global score
             #Variables
@@ -617,11 +574,8 @@ def ven0():
             scores_text = tk.Label(info_frame, text='High Score: ' + str(high_score), bg=white)
             scores_text.grid(row=0, column=3, padx=10)
             #Matriz 
-<<<<<<< HEAD
+
             tablero =  [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
-=======
-            tablero = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
->>>>>>> e5648ac4b153554aea299bcfafad4a4cb8763fca
                         [0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0], 
                         [0, 3, 0, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0, 0, 0, 3, 0], 
                         [0, 3, 0, 4, 4, 0, 3, 0, 4, 0, 3, 0, 4, 4, 4, 4, 0, 3, 0, 4, 4, 4, 4, 0, 3, 0, 4, 0, 3, 0, 4, 4, 4, 0, 3, 0], 
