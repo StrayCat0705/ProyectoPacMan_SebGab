@@ -21,7 +21,7 @@ def ven0():
     mainmenu_canvas = Canvas(r, width=1200, height=675)
     mainmenu_canvas.pack(fill='both', expand=True)
     # Main menu background
-    mainmenu_bg = PhotoImage(file='mainmenu_bg.png')
+    mainmenu_bg = PhotoImage(file='ProyectoPacman/mainmenu_bg.png')
     label_mainmenu = Label(r, image=mainmenu_bg)
     label_mainmenu.place(x=0, y=0, relwidth=1, relheight=1)
     # Colors
@@ -39,7 +39,6 @@ def ven0():
 
             get_name = StringVar()
             entry_name = tk.Entry(name_pantalla_TP, width= 50, borderwidth=10,  textvariable = get_name).place(x=140, y=400)
-
 
             def introducir_name():
                 global Name
@@ -105,7 +104,7 @@ def ven0():
             scores_text = tk.Label(info_frame, text='High Score: ' + str(high_score), bg=white)
             scores_text.grid(row=0, column=3, padx=10)
             #Matriz 
-            tablero = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+            tablero =  [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
                         [0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0], 
                         [0, 3, 0, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0, 0, 0, 3, 0], 
                         [0, 3, 0, 4, 4, 0, 3, 0, 4, 0, 3, 0, 4, 4, 4, 4, 0, 3, 0, 4, 4, 4, 4, 0, 3, 0, 4, 0, 3, 0, 4, 4, 4, 0, 3, 0], 
@@ -156,6 +155,7 @@ def ven0():
                             x2 = x1 + 10
                             y2 = y1 + 10
                             level1_canvas.create_rectangle(x1, y1, x2, y2, fill="blue")
+
             dibujar_cuadros_desde_matriz(tablero)
             # Clase base para los personajes
             class Personaje:
@@ -494,7 +494,7 @@ def ven0():
                         enemigo.posicion_y = nuevo_y
             mover_enemigos()
             imprimir_matriz()
-            
+
         def level_2(self, enemies):
             global score
             #Variables
@@ -935,13 +935,13 @@ def ven0():
         ventana_instance.helpCenter()
 
     #Botones
-    play_button = Button(r, text='PLAY', font='Courier 14', command=namePantalla)
-    play_button.config(width=14, height=3)
+    play_button = Button(r, text='PLAY', font='Courier 13', command=namePantalla)
+    play_button.config(width=13, height=3)
     score_button = Button(r, text='High scores', font='Courier', command=highScores)
     config_button = Button(r, text='Settings', font='Courier', command=settings)
     info_button = Button(r, text='About us', font='Courier', command=aboutUs)
     help_button = Button(r, text='Help', command=helpCenter)
-    play_window = mainmenu_canvas.create_window(600, 460, anchor="center", window=play_button)
+    play_window = mainmenu_canvas.create_window(600, 360, anchor="center", window=play_button)
     score_window = mainmenu_canvas.create_window(600, 510, anchor="n", window=score_button)
     config_window = mainmenu_canvas.create_window(600, 550, anchor="n", window=config_button)
     info_window = mainmenu_canvas.create_window(600, 590, anchor="n", window=info_button)

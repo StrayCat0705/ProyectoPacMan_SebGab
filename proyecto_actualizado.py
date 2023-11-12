@@ -9,6 +9,153 @@ columnas = 36
 tablero = [[4 for _ in range(columnas)] for n in range(filas)]
 
 
+<<<<<<< HEAD
+## borde de abajo
+fila_deseada = 0  # La primera fila, ten en cuenta que la indexación comienza desde 0
+columna_inicio = 0
+columna_fin = 36
+
+# Valor a colocar en ese rango de columnas
+valor = 0
+
+# Asignar el valor en el rango específico de columnas en la fila
+for columna in range(columna_inicio, columna_fin):
+    tablero[fila_deseada][columna] = valor
+
+## borde de arriba
+fila_deseada = 39  # La primera fila, ten en cuenta que la indexación comienza desde 0
+columna_inicio = 0
+columna_fin = 36
+
+# Valor a colocar en ese rango de columnas
+valor = 0
+
+# Asignar el valor en el rango específico de columnas en la fila
+for columna in range(columna_inicio, columna_fin):
+    tablero[fila_deseada][columna] = valor
+
+## borde de la derecha de abajo
+columna_deseada = 0  # La primera fila, ten en cuenta que la indexación comienza desde 0
+fila_inicio = 0
+fila_fin = 14
+
+# Valor a colocar en ese rango de columnas
+valor = 0
+
+# Asignar el valor en el rango específico de columnas en la fila
+for fila in range(fila_inicio, fila_fin):
+    tablero[fila][columna_deseada] = valor
+
+## borde de abajo a la izquierda
+columna_deseada = 35  # La primera fila, ten en cuenta que la indexación comienza desde 0
+fila_inicio = 0
+fila_fin = 14
+
+# Valor a colocar en ese rango de columnas
+valor = 0
+
+# Asignar el valor en el rango específico de columnas en la fila
+for fila in range(fila_inicio, fila_fin):
+    tablero[fila][columna_deseada] = valor
+
+##borde de arriba a la derecha
+columna_deseada = 0  # La primera fila, ten en cuenta que la indexación comienza desde 0
+fila_inicio = 26
+fila_fin = 39
+
+# Valor a colocar en ese rango de columnas
+valor = 0
+
+# Asignar el valor en el rango específico de columnas en la fila
+for fila in range(fila_inicio, fila_fin):
+    tablero[fila][columna_deseada] = valor
+
+##borde de arriba a la izquierda
+columna_deseada = 35  # La primera fila, ten en cuenta que la indexación comienza desde 0
+fila_inicio = 26
+fila_fin = 39
+
+# Valor a colocar en ese rango de columnas
+valor = 0
+
+# Asignar el valor en el rango específico de columnas en la fila
+for fila in range(fila_inicio, fila_fin):
+    tablero[fila][columna_deseada] = valor
+
+## primer cuadrado derecha abajo
+columna_inicio = 2
+columna_final = 5  # La primera fila, ten en cuenta que la indexación comienza desde 0
+fila_inicio = 2
+fila_fin = 5
+
+# Valor a colocar en ese rango de columnas
+valor = 0
+
+# Asignar el valor en el rango específico de columnas en la fila
+for fila in range(fila_inicio, fila_fin):
+    for columna in range(columna_inicio, columna_final):
+        tablero[fila][columna] = valor
+
+## segundo cuadrado
+columna_inicio = 2
+columna_final = 5  # La primera fila, ten en cuenta que la indexación comienza desde 0
+fila_inicio = 6
+fila_fin = 9
+
+# Valor a colocar en ese rango de columnas
+valor = 0
+
+# Asignar el valor en el rango específico de columnas en la fila
+for fila in range(fila_inicio, fila_fin):
+    for columna in range(columna_inicio, columna_final):
+        tablero[fila][columna] = valor
+
+## tercer cuadrado
+columna_inicio = 2
+columna_final = 5  # La primera fila, ten en cuenta que la indexación comienza desde 0
+fila_inicio = 10
+fila_fin = 12
+
+# Valor a colocar en ese rango de columnas
+valor = 0
+
+# Asignar el valor en el rango específico de columnas en la fila
+for fila in range(fila_inicio, fila_fin):
+    for columna in range(columna_inicio, columna_final):
+        tablero[fila][columna] = valor
+
+
+##cuadrado al lado de los 3 cuadrados en la derecha abajo
+columna_inicio = 7
+columna_final = 10 # La primera fila, ten en cuenta que la indexación comienza desde 0
+fila_inicio = 2
+fila_fin = 10
+
+# Valor a colocar en ese rango de columnas
+valor = 0
+
+# Asignar el valor en el rango específico de columnas en la fila
+for fila in range(fila_inicio, fila_fin):
+    for columna in range(columna_inicio, columna_final):
+        tablero[fila][columna] = valor
+
+##pared de en medio derecha abajo
+columna_inicio = 7
+columna_final = 10 # La primera fila, ten en cuenta que la indexación comienza desde 0
+fila_inicio = 2
+fila_fin = 10
+
+# Valor a colocar en ese rango de columnas
+valor = 0
+
+# Asignar el valor en el rango específico de columnas en la fila
+for fila in range(fila_inicio, fila_fin):
+    for columna in range(columna_inicio, columna_final):
+        tablero[fila][columna] = valor
+
+
+=======
+>>>>>>> 6c152cb119fabd46483b9efadb000499b8f7cba0
 
 # Clase base para los personajes
 class Personaje:
