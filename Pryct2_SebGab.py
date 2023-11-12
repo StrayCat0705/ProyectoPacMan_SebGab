@@ -552,6 +552,7 @@ def ven0():
             class PacMan(Personaje):
                 def __init__(self, estado, posicion_x, posicion_y, velocidad):
                     super().__init__(estado, posicion_x, posicion_y, velocidad)
+                    self.estado = 'ser comido'
 
                 def comer_alimento(self):
                     # Lógica específica para PacMan al comer alimento
@@ -560,6 +561,19 @@ def ven0():
                 def comer_capsula(self):
                     # Lógica específica para PacMan al comer cápsula
                     pass
+                
+                def get_posX(self):
+                    return self.posicion_x
+                def get_posY(self):
+                    return self.posicion_y
+
+                def get_estado(self):
+                    return self.estado 
+                def change_estado(self, n):
+                    if n == 1:
+                        self.estado = 'comer'
+                    else:
+                        self.estado = 'ser comido'
 
             # Clase para Fantasma
             class Fantasma(Personaje):
@@ -572,6 +586,12 @@ def ven0():
                     
                     super().__init__(estado, posicion_x, posicion_y, velocidad)
                     self.color = color
+                def get_posX(self):
+                    return self.posicion_x
+                def get_posY(self):
+                    return self.posicion_y
+                def get_coords(self):
+                    return self.posicion_x, self.posicion_y
 
             # Crear una instancia de PacMan y configurar su posición inicial
             pacman = PacMan(estado=True, posicion_x=5, posicion_y=5, velocidad=1)
@@ -600,6 +620,109 @@ def ven0():
                     print(row)
                 print(f"posx:{pacman.posicion_x}, posy: {pacman.posicion_y}\n")
 
+            #Colisiones
+            def colision_D():
+                pacmanCoords = pacman.get_posX() + 1, pacman.get_posY()
+                i = 0
+                n = len(enemigos)
+                while i != n:
+                    if i == n:
+                        break
+                    if pacman.get_estado() == 'comer':
+                        if pacmanCoords == enemigos[i].get_coords():
+                            print('colision')
+                            ventana_instance = Ventanas(score=0, name="DefaultName")
+                            ventana_instance.add_foodScore(2)
+                            i  += 1
+                        else:
+                            print('no colision')
+                            i += 1
+                    else:
+                        if pacmanCoords == enemigos[i].get_coords():
+                            print('colision')
+                            lives -= 1
+                            print(str(lives))
+                            i += 1
+                        else:
+                            print('no colision')
+                            i += 1
+
+            def colision_I():
+                pacmanCoords = pacman.get_posX() - 1, pacman.get_posY()
+                i = 0
+                n = len(enemigos)
+                while i != n:
+                    if i == n:
+                        break
+                    if pacman.get_estado() == 'comer':
+                        if pacmanCoords == enemigos[i].get_coords():
+                            print('colision')
+                            ventana_instance = Ventanas(score=0, name="DefaultName")
+                            ventana_instance.add_foodScore(2)
+                            i  += 1
+                        else:
+                            print('no colision')
+                            i += 1
+                    else:
+                        if pacmanCoords == enemigos[i].get_coords():
+                            print('colision')
+                            lives -= 1
+                            print(str(lives))
+                            i += 1
+                        else:
+                            print('no colision')
+                            i += 1
+            def colision_AB():
+                pacmanCoords = pacman.get_posX(), pacman.get_posY() + 1
+                i = 0
+                n = len(enemigos)
+                while i != n:
+                    if i == n:
+                        break
+                    if pacman.get_estado() == 'comer':
+                        if pacmanCoords == enemigos[i].get_coords():
+                            print('colision')
+                            ventana_instance = Ventanas(score=0, name="DefaultName")
+                            ventana_instance.add_foodScore(2)
+                            i  += 1
+                        else:
+                            print('no colision')
+                            i += 1
+                    else:
+                        if pacmanCoords == enemigos[i].get_coords():
+                            print('colision')
+                            lives -= 1
+                            print(str(lives))
+                            i += 1
+                        else:
+                            print('no colision')
+                            i += 1
+            def colision_A():
+                pacmanCoords = pacman.get_posX(), pacman.get_posY() - 1
+                i = 0
+                n = len(enemigos)
+                while i != n:
+                    if i == n:
+                        break
+                    if pacman.get_estado() == 'comer':
+                        if pacmanCoords == enemigos[i].get_coords():
+                            print('colision')
+                            ventana_instance = Ventanas(score=0, name="DefaultName")
+                            ventana_instance.add_foodScore(2)
+                            i  += 1
+                        else:
+                            print('no colision')
+                            i += 1
+                    else:
+                        if pacmanCoords == enemigos[i].get_coords():
+                            print('colision')
+                            lives -= 1
+                            print(str(lives))
+                            i += 1
+                        else:
+                            print('no colision')
+                            i += 1
+
             # Función para mover al jugador
             def mover_jugador(dx, dy):
                 nuevo_x = pacman.posicion_x + dx
@@ -610,19 +733,19 @@ def ven0():
 
             # Asignar las funciones de movimiento a las teclas
             def mover_derecha():
-                print('d')
-                mover_jugador(1, 0)
+                colision_D()
+                mover_jugador(+1, 0)
 
             def mover_izquierda():
-                print('i')
+                colision_I()
                 mover_jugador(-1, 0)
 
             def mover_abajo():
-                print('ab')
-                mover_jugador(0, 1)
+                colision_AB()
+                mover_jugador(0, +1)
 
             def mover_arriba():
-                print('a')
+                colision_A()
                 mover_jugador(0, -1)
 
             teclas = ['a', 's', 'd', 'w']
