@@ -2,11 +2,13 @@ import keyboard
 import random
 
 # Tamaño del tablero
-filas = 7
-columnas = 7
+filas = 40
+columnas = 36
 
 # Crear el tablero inicial
 tablero = [[4 for _ in range(columnas)] for n in range(filas)]
+
+
 
 # Clase base para los personajes
 class Personaje:
@@ -52,24 +54,7 @@ class PacMan(Personaje):
     def comer_capsula(self):
         # Lógica específica para PacMan al comer cápsula
         pass
-    #Conseguir las coordenadas de pacman 
-    def get_posicionXY_pac(self):
-        return self.posicion_x, self.posicion_y
-    def get_posicionX(self):
-        return self.posicion_x
-    def get_posicionY(self):
-        return self.posicion_y
-    #Conseguir el estado de pacman
-    def get_estadoPac(self):
-        return self.estado
-    #Cambiar de estado
-    def cambio_de_estado(self):
-        self.estado = 'comer'
-        print('cambio estado')
-    def cambio_de_estado2(self):
-        self.estado = 'comida'
-        print('cambio estado')
-        
+
 # Clase para Fantasma
 class Fantasma(Personaje):
     def __init__(self, estado, posicion_x, posicion_y, color):
@@ -81,30 +66,25 @@ class Fantasma(Personaje):
         
         super().__init__(estado, posicion_x, posicion_y, velocidad)
         self.color = color
-    #Conseguir las coordenadas del enemigo 
-    def get_posicionXY_en(self):
-        return self.posicion_x, self.posicion_y
 
 # Crear una instancia de PacMan y configurar su posición inicial
 pacman = PacMan(estado=True, posicion_x=5, posicion_y=5, velocidad=1)
-
 # Lista de enemigos (cada enemigo es una instancia de Fantasma)
-enemigos = [Fantasma(estado=True, posicion_x=6, posicion_y=5, color='rojo'),
+enemigos = [Fantasma(estado=True, posicion_x=10, posicion_y=15, color='rojo'),
             Fantasma(estado=True, posicion_x=20, posicion_y=25, color='celeste'),
             Fantasma(estado=True, posicion_x=30, posicion_y=5, color='rosado'),
-            Fantasma(estado=True, posicion_x=30, posicion_y=10, color='naranja')]
-
+            Fantasma(estado=True, posicion_x=30, posicion_y=10, color='naranja'),]
 # Función para imprimir el tablero con separación horizontal
 def imprimir_matriz():
     for n in range(len(tablero)):
         row = ""
         for x in range(len(tablero[0])):
             if n == pacman.posicion_y and x == pacman.posicion_x:
-                row += "⍩⃝ "
+                row += "6 "
             else:
                 for enemigo in enemigos:
                     if n == enemigo.posicion_y and x == enemigo.posicion_x:
-                        row += "👻 "
+                        row += "5 "
                         break
                 else:
                     if tablero[n][x] == 0:
@@ -114,95 +94,30 @@ def imprimir_matriz():
         print(row)
     print(f"posx:{pacman.posicion_x}, posy: {pacman.posicion_y}\n")
 
-def imprimir_matriz2():
-    for n in range(len(tablero)):
-        row = ""
-        for x in range(len(tablero[0])):
-            for enemigo in enemigos:
-                if n == enemigo.posicion_y and x == enemigo.posicion_x:
-                    row += "👻 "
-                    break
-                else:
-                    if tablero[n][x] == 0:
-                        row += "0 "
-                    else:
-                        row += "4 "
-        print(row)
-    print(f"posx:{pacman.posicion_x}, posy: {pacman.posicion_y}\n")
+# Restringir el movimiento del jugador solo cuando no hay enemigos en la casilla
+def puede_mover(x, y):
+    return (0 <= x < columnas and 0 <= y < filas and tablero[y][x] != 0 and not any(enemigo.posicion_x == x and enemigo.posicion_y == y for enemigo in enemigos))
 
 # Función para mover al jugador
 def mover_jugador(dx, dy):
     nuevo_x = pacman.posicion_x + dx
     nuevo_y = pacman.posicion_y + dy
-    pacman.posicion_x = nuevo_x
-    pacman.posicion_y = nuevo_y
-    imprimir_matriz()
-    colisiones()
-
-#Colisiones
-def colisiones():
-    i = 0
-    n = len(enemigos)
-    while i != n:
-        if enemigos[i].get_posicionXY_en() == pacman.get_posicionXY_pac():
-            i+=1
-            print('chocaron')
-        elif i == n:
-            break
-        else:
-            i+=1
-            print('No chocaron')
-
-#Comida 
-def comer_d():
-    coordPAC = pacman.get_posicionXY_pac()
-    if tablero[pacman.get_posicionX() + 1][pacman.get_posicionY()] == 3:
-        print('comida')
-    elif tablero[pacman.get_posicionX() + 1][pacman.get_posicionY()] == 2:
-        pacman.cambio_de_estado()
-    else:
-        print('no comida')
-def comer_i():
-    coordPAC = pacman.get_posicionXY_pac()
-    if tablero[pacman.get_posicionX() - 1][pacman.get_posicionY()] == 3:
-        print('comida')
-    elif tablero[pacman.get_posicionX() - 1][pacman.get_posicionY()] == 2:
-        pacman.cambio_de_estado()
-    else:
-        print('no comida')
-def comer_ab():
-    coordPAC = pacman.get_posicionXY_pac()
-    if tablero[pacman.get_posicionX()][pacman.get_posicionY() + 1] == 3:
-        print('comida')
-    elif tablero[pacman.get_posicionX()][pacman.get_posicionY() + 1] == 2:
-        pacman.cambio_de_estado()
-    else:
-        print('no comida')
-def comer_a():
-    coordPAC = pacman.get_posicionXY_pac()
-    if tablero[pacman.get_posicionX()][pacman.get_posicionY() - 1] == 3:
-        print('comida')
-    elif tablero[pacman.get_posicionX()][pacman.get_posicionY() - 1] == 2:
-        pacman.cambio_de_estado()
-    else:
-        print('no comida')
-
+    if puede_mover(nuevo_x, nuevo_y):
+        pacman.posicion_x = nuevo_x
+        pacman.posicion_y = nuevo_y
+        imprimir_matriz()
 
 # Asignar las funciones de movimiento a las teclas
 def mover_derecha():
-    comer_d()
     mover_jugador(1, 0)
 
 def mover_izquierda():
-    comer_i()
     mover_jugador(-1, 0)
 
 def mover_abajo():
-    comer_ab()
     mover_jugador(0, 1)
 
 def mover_arriba():
-    comer_a()
     mover_jugador(0, -1)
 
 teclas = ['a', 's', 'd', 'w']
@@ -232,7 +147,6 @@ def mover_enemigos():
 
 # Bucle principal
 while True:
-    #mover_enemigos()
+    mover_enemigos()
     imprimir_matriz()
     keyboard.read_event()
-
