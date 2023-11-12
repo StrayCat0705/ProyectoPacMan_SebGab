@@ -86,6 +86,8 @@ def ven0():
         def highScores(self):
             print(7)
 
+        
+
         def level_1(self):
             #Variables
             lives = 3
@@ -169,6 +171,42 @@ def ven0():
                             y2 = y1 + 10
                             level1_canvas.create_rectangle(x1, y1, x2, y2, fill="blue")
             dibujar_cuadros_desde_matriz(tablero)
+            def on_key_press(event):
+                key = event.keysym
+                if key == "Up":
+                    pacman.mover_arriba()
+                elif key == "Down":
+                    pacman.mover_abajo()
+                elif key == "Left":
+                    pacman.mover_izquierda()
+                elif key == "Right":
+                    pacman.mover_derecha()
+
+                # Update positions on the canvas
+                update_positions()
+
+            def update_positions():
+                # Clear the canvas
+                level1_canvas.delete("all")
+
+                # Redraw the matrix
+                dibujar_cuadros_desde_matriz(tablero)
+
+                # Draw PacMan at the new position
+                x1 = pacman.get_posY() * 10
+                y1 = pacman.get_posX() * 10
+                x2 = x1 + 10
+                y2 = y1 + 10
+                level1_canvas.create_oval(x1, y1, x2, y2, fill="yellow")
+
+                # Draw ghosts at their positions
+                for ghost in enemigos:
+                    x1 = ghost.get_posY() * 10
+                    y1 = ghost.get_posX() * 10
+                    x2 = x1 + 10
+                    y2 = y1 + 10
+                    level1_canvas.create_rectangle(x1, y1, x2, y2, fill="red")
+            r.bind("<Key>", on_key_press)
             # Clase base para los personajes
             class Personaje:
                 def __init__(self, estado, posicion_x, posicion_y, velocidad):
@@ -425,8 +463,50 @@ def ven0():
                     if (0 <= nuevo_x < 36 and 0 <= nuevo_y < 40 and tablero[nuevo_y][nuevo_x] != 0):
                         enemigo.posicion_x = nuevo_x
                         enemigo.posicion_y = nuevo_y
+            
             mover_enemigos()
             imprimir_matriz()
+            def dibujar_personajes():
+                # Borrar todos los elementos en el canvas
+                level1_canvas.delete("all")
+
+                # Dibujar las paredes y otros elementos desde la matriz
+                dibujar_cuadros_desde_matriz(tablero)
+
+                # Dibujar PacMan
+                pacman_coords = (pacman.posicion_x * 10, pacman.posicion_y * 10)
+                level1_canvas.create_oval(pacman_coords[1], pacman_coords[0], pacman_coords[1] + 10, pacman_coords[0] + 10, fill="yellow")
+
+                # Dibujar fantasmas
+                for enemigo in enemigos:
+                    enemigo_coords = (enemigo.posicion_x * 10, enemigo.posicion_y * 10)
+                    level1_canvas.create_rectangle(enemigo_coords[1], enemigo_coords[0], enemigo_coords[1] + 10, enemigo_coords[0] + 10, fill="red")
+
+                # Actualizar el canvas
+                level1.update()
+
+            def mover_personajes(event):
+                # Mover PacMan
+                if event.keysym == 'Up':
+                    pacman.mover_arriba()
+                elif event.keysym == 'Down':
+                    pacman.mover_abajo()
+                elif event.keysym == 'Left':
+                    pacman.mover_izquierda()
+                elif event.keysym == 'Right':
+                    pacman.mover_derecha()
+                mover_personajes(event)
+                colision_D()
+                colision_I()
+                colision_AB()
+                dibujar_personajes()
+            level1.bind('<Key>', mover_personajes)
+
+            # Enfocar el canvas para que pueda recibir eventos del teclado
+            level1_canvas.focus_set()
+
+            # Dibujar los personajes inicialmente
+            dibujar_personajes()
         def level_2(self, enemies):
             #Variables
             lives = 3
@@ -798,6 +878,6 @@ def ven0():
     config_window = mainmenu_canvas.create_window(600, 550, anchor="n", window=config_button)
     info_window = mainmenu_canvas.create_window(600, 590, anchor="n", window=info_button)
     help_window = mainmenu_canvas.create_window(1150, 600, anchor="n", window=help_button)
-
+    
     r.mainloop()
 ven0()
