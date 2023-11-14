@@ -405,16 +405,16 @@ def ven0():
             fantasmaNARANJA = Fantasma(estado=True, posicion_x=30, posicion_y=10, color='naranja')
             fantasmarojo_imagen = Image.open('fantasmarojo.png')
             fantasmarojo = ImageTk.PhotoImage(fantasmarojo_imagen)
-            fantasma1 = level1_canvas.create_image(175, 375, image=fantasmarojo, anchor='center')
+            fantasma1 = level1_canvas.create_image(175, 385, image=fantasmarojo, anchor='center')
             fantasmanaranja_imagen = Image.open('fantasmanaranja.png')
             fantasmanaranja = ImageTk.PhotoImage(fantasmanaranja_imagen)
-            fantasma2 = level1_canvas.create_image(175, 375, image=fantasmanaranja, anchor='center')
+            fantasma2 = level1_canvas.create_image(175, 385, image=fantasmanaranja, anchor='center')
             fantasmarosado_imagen = Image.open('fantasmarosado.png')
             fantasmarosado = ImageTk.PhotoImage(fantasmarosado_imagen)
-            fantasma3 = level1_canvas.create_image(175, 375, image=fantasmarosado, anchor='center')
+            fantasma3 = level1_canvas.create_image(175, 385, image=fantasmarosado, anchor='center')
             fantasmaceleste_imagen = Image.open('fantasmaceleste.png')
             fantasmaceleste = ImageTk.PhotoImage(fantasmaceleste_imagen)
-            fantasma4 = level1_canvas.create_image(175, 375, image=fantasmaceleste, anchor='center')
+            fantasma4 = level1_canvas.create_image(175, 385, image=fantasmaceleste, anchor='center')
 
             enemigos = [fantasmaROJO, fantasmaCELESTE, fantasmaROSADO, fantasmaNARANJA]
             def moverDerechaRojo(n):
@@ -556,7 +556,7 @@ def ven0():
  [235,255] ,  [255,255] ,  [275,255] ,  [295,255] ,  [305,255] ,  [315,255] ,  [325,255] ,  [335,255] ,  [345,255] ,  [355,255] ,  [5,265] ,  [75,265] ,  [85,265] ,  [95,265] ,  [115,265] ,  [125,265] ,  [135,265] ,  [145,265] ,  [155,265] ,  [165,265] ,  [175,265] ,  [185,265] ,  [195,265] ,  [205,265] ,  [215,265] ,  [225,265] ,  [235,265] ,  [255,265] ,  [265,265] ,  [275,265] ,  [355,265] ,  [5,275] ,  [25,275] ,  [35,275] ,  [45,275] ,  [55,275] ,  [295,275] ,  [305,275] ,  [315,275] ,  [325,275] ,  [335,275] ,  [355,275] ,  [5,285] ,  [25,285] ,  [55,285] ,  [295,285] ,  [335,285] ,  [355,285] ,  [5,295] ,  [25,295] ,  [55,295] ,  [75,295] ,  [85,295] ,  [95,295] ,  [105,295] ,  [115,295] ,  [125,295] ,  [135,295] ,  [145,295] ,  [155,295] ,  [165,295] ,  [175,295] ,  [185,295] ,  [195,295] ,  [205,295] ,  [215,295] ,  [225,295] ,  [235,295] ,  [245,295] ,  [255,295] ,  [265,295] ,  [275,295] ,  [295,295] ,  [335,295] ,  [355,295] ,  [5,305] ,  [25,305] ,  [55,305] ,  [75,305] ,  [275,305] ,  [295,305] ,  [335,305] ,  [355,305] ,  [5,315] ,  [25,315] ,  [55,315] ,  [75,315] ,  [275,315] ,  [295,315] ,  [335,315] ,  [355,315] ,  [5,325] ,  [25,325] ,  [35,325] ,  [45,325] ,  [55,325] ,  [75,325] ,  [85,325] ,  [95,325] ,  [105,325] ,  [115,325] ,  [125,325] ,  [135,325] ,  [145,325] ,  [205,325] ,  [215,325] ,  [225,325] ,  [235,325] ,  [245,325] ,  [255,325] ,  [265,325] ,  [275,325] ,  [295,325] ,  [305,325] ,  [315,325] ,  [325,325] ,  [335,325] ,  [355,325] ,  [5,335] ,  [145,335] ,  [205,335] ,  [355,335] ,  [5,345] ,  [25,345] ,  [35,345] ,  [45,345] ,  [55,345] ,  [65,345] ,  [75,345] ,  [85,345] ,  [95,345] ,  [105,345] ,  [115,345] ,  [125,345] ,  [145,345] ,  [205,345] ,  [225,345] ,  [235,345] ,  [245,345] ,  [255,345] ,  [265,345] ,  [275,345] ,  [295,345] ,  [305,345] ,  [315,345] ,  [325,345] ,  [335,345] ,  [355,345] ,  [5,355] ,  [25,355] ,  [125,355] ,  [145,355] ,  [205,355] ,  [225,355] ,  [275,355] ,  [295,355] ,  [335,355] ,  [355,355] ,  [5,365] ,  [25,365] ,  [125,365] ,  [145,365] ,  [205,365] ,  [225,365] ,  [275,365] ,  [295,365] ,  [335,365] ,  [355,365] ,  [5,375] ,  [25,375] ,  [35,375] ,  [45,375] ,  [55,375] ,  [65,375] ,  [75,375] ,  [85,375] ,  [95,375] ,  [105,375] ,  [115,375] ,  [125,375] ,  [145,375] ,  [155,375] ,  [195,375] ,  [205,375] ,  [225,375] ,  [235,375] ,  [245,375] ,  [255,375] ,  [265,375] ,  [275,375] ,  [295,375] ,  [305,375] ,  [315,375] ,  [325,375] ,  [335,375] ,  [355,375] ,  [5,385] ,  [355,385] ,  [5,395] ,  [15,395] ,  [25,395] ,  [35,395] ,  [45,395] ,  [55,395] , 
  [65,395] ,  [75,395] ,  [85,395] ,  [95,395] ,  [105,395] ,  [115,395] ,  [125,395] ,  [135,395] ,  [145,395] ,  [155,395] ,  [165,395] ,  [175,395] ,  [185,395] ,  [195,395] ,  [205,395] ,  [215,395] ,  [225,395] ,  [235,395] ,  [245,395] ,  [255,395] ,  [265,395] ,  [275,395] ,  [285,395] ,  [295,395] ,  [305,395] ,  [315,395] ,  [325,395] ,  [335,395] ,  [345,395] ,  [355,395] ]
                 mover_fantasmaROJO(0, +1)
-                moverAbajoNaranja(10)
+                moverAbajoRojo(10)
                 coords = level1_canvas.coords(fantasma1)
                 coordspacman = level1_canvas.coords(user)
                 if coords in lista:
